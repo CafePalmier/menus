@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palmier</title>
+    <!-- Import the Metropolis font and link the stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Metropolis:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=20241126z" />
+  </head>
+  <body>
+    <!-- Language toggle -->
+    <div id="langSwitcher" class="language-switcher eng-active" data-lang-switcher>
+      <div id="langToggle" class="toggle"></div>
+      <span class="eng">ENG</span>
+      <span class="fra">FRA</span>
+    </div>
+
+    <div class="container">
+      <!-- Home page wrapper: everything visible on the home screen goes here -->
+      <div id="homePage">
+        <img src="Assets/palmier-logo.png" alt="Palmier" class="logo" />
+
+        <!-- Social media buttons (now anchors) -->
+        <div class="social-row">
+          <a href="https://www.instagram.com/cafe.palmier?igsh=MWsxeDBrZHA3Ym5z" class="social-btn" target="_blank" rel="noopener noreferrer">
+            <div class="social-content">
+              <img src="Assets/instagram.png" alt="Instagram" />
+            </div>
+          </a>
+          <a href="https://www.tiktok.com/@cafe.palmier" class="social-btn" target="_blank" rel="noopener noreferrer">
+            <div class="social-content">
+              <img src="Assets/tik-tok.png" alt="TikTok" />
+            </div>
+          </a>
+          <a href="https://www.facebook.com/share/14JDLJfr2qp/?mibextid=wwXIfr" class="social-btn" target="_blank" rel="noopener noreferrer">
+            <div class="social-content">
+              <img src="Assets/faceook.png" alt="Facebook" />
+            </div>
+          </a>
+        </div>
+
+        <!-- Grid of menu tiles -->
+        <div class="tile-grid">
+          <div id="foodBtn" class="tile">
+            <div class="tile-content">
+              <img src="Assets/food.png" alt="Food icon" />
+              <span class="label" data-key="food">Food</span>
+            </div>
+          </div>
+          <div id="teaBtn" class="tile">
+            <div class="tile-content">
+              <img src="Assets/tea.png" alt="Tea icon" />
+              <span class="label" data-key="tea">Tea</span>
+            </div>
+          </div>
+          <div id="cocktailsBtn" class="tile">
+            <div class="tile-content">
+              <img src="Assets/cocktail.png" alt="Cocktails icon" />
+              <span class="label" data-key="cocktails">Cocktails</span>
+            </div>
+          </div>
+          <div id="coffeeBtn" class="tile">
+            <div class="tile-content">
+              <img src="Assets/coffee.png" alt="Coffee icon" />
+              <span class="label" data-key="coffee">Coffee</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coffee shelf button -->
+        <div id="shelfBtn" class="large-button">
+          <div class="button-content">
+            <img src="Assets/coffee-shelf.png" alt="Coffee shelf icon" class="button-icon" />
+            <span class="label" data-key="shelf">Discover our Coffee Shelf</span>
+          </div>
+        </div>
+
+        <!-- Review button -->
+        <div id="reviewBtn"
+             class="large-button review-card"
+             role="link"
+             tabindex="0"
+             aria-label="Leave us a review">
+          <div class="button-content">
+            <span class="label" data-key="review">Leave us a review</span>
+            <img src="Assets/review.png" alt="" aria-hidden="true" class="button-icon" />
+          </div>
+        </div>
+      </div><!-- end of homePage -->
+
+      <!-- Food menu page -->
+      <div id="foodPage" class="menu-page food-page" style="display:none;">
+        <div class="page-header food-header">
+          <div class="food-header-top">
+            <button id="backHome" class="back-button compact">
+              <span class="back-arrow" aria-hidden="true"></span>
+              <span class="sr-only">Back</span>
+            </button>
+            <div class="section-dropdown">
+              <button id="foodSectionToggle" type="button" class="section-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+                <span id="foodSectionLabel">Toast</span>
+                <span class="chevron" aria-hidden="true"></span>
+              </button>
+              <div id="foodSectionList" class="section-dropdown-list" aria-hidden="true"></div>
+            </div>
+            <div class="food-header-lang">
+              <div id="foodLangSwitcher" class="language-switcher inline-switcher eng-active" data-lang-switcher>
+                <div class="toggle"></div>
+                <span class="eng">ENG</span>
+                <span class="fra">FRA</span>
+              </div>
+            </div>
+          </div>
+          <div class="food-legend" aria-label="Menu legend">
+            <div class="legend-item">
+              <span id="legendGfPill" class="legend-pill pill-gf">GF</span>
+              <span id="legendGfText" class="legend-label">Gluten Free</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-pill pill-vegetarian">V</span>
+              <span id="legendVegetarianText" class="legend-label">Vegetarian</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-pill pill-vegan">V</span>
+              <span id="legendVeganText" class="legend-label">Vegan</span>
+            </div>
+          </div>
+        </div>
+        <div class="food-content">
+          <div id="foodMenuEn" class="food-menu menu-text"></div>
+          <div id="foodMenuFr" class="food-menu menu-text" hidden></div>
+        </div>
+      </div><!-- end of foodPage -->
+
+      <!-- Tea menu page -->
+      <div id="teaPage" class="menu-page tea-page" style="display:none;">
+        <div class="page-header">
+          <button id="backTea" class="back-button compact">
+            <span class="back-arrow" aria-hidden="true"></span>
+            <span class="sr-only">Back</span>
+          </button>
+          <div class="page-header-lang">
+            <div id="teaLangSwitcher" class="language-switcher inline-switcher eng-active" data-lang-switcher>
+              <div class="toggle"></div>
+              <span class="eng">ENG</span>
+              <span class="fra">FRA</span>
+            </div>
+          </div>
+        </div>
+        <img id="teaImage" class="menu-image" src="Assets/menus/tea-eng.png" alt="Tea menu (English)" />
+      </div><!-- end of teaPage -->
+
+      <!-- Coffee menu page -->
+      <div id="coffeePage" class="menu-page coffee-page" style="display:none;">
+        <div class="page-header">
+          <button id="backCoffee" class="back-button compact">
+            <span class="back-arrow" aria-hidden="true"></span>
+            <span class="sr-only">Back</span>
+          </button>
+          <div class="page-header-lang">
+            <div id="coffeeLangSwitcher" class="language-switcher inline-switcher eng-active" data-lang-switcher>
+              <div class="toggle"></div>
+              <span class="eng">ENG</span>
+              <span class="fra">FRA</span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-image-wrapper">
+          <img id="coffeeImage" class="menu-image" src="Assets/menus/coffee-eng.png" alt="Coffee menu (English)" />
+        </div>
+      </div><!-- end of coffeePage -->
+
+      <!-- Cocktails menu page -->
+      <div id="cocktailsPage" class="menu-page cocktails-page" style="display:none;">
+        <div class="page-header">
+          <button id="backCocktails" class="back-button compact">
+            <span class="back-arrow" aria-hidden="true"></span>
+            <span class="sr-only">Back</span>
+          </button>
+        </div>
+        <img id="cocktailsImage" class="menu-image" src="Assets/menus/cocktails.png" alt="Cocktails menu" />
+      </div><!-- end of cocktailsPage -->
+
+      <!-- Coffee shelf page -->
+      <div id="shelfPage" class="menu-page shelf-page" style="display:none;">
+        <div class="page-header">
+          <button id="backShelf" class="back-button compact">
+            <span class="back-arrow" aria-hidden="true"></span>
+            <span class="sr-only">Back</span>
+          </button>
+          <div class="page-header-lang">
+            <div id="shelfLangSwitcher" class="language-switcher inline-switcher eng-active" data-lang-switcher>
+              <div class="toggle"></div>
+              <span class="eng">ENG</span>
+              <span class="fra">FRA</span>
+            </div>
+          </div>
+        </div>
+        <div class="shelf-grid">
+          <a class="shelf-card" href="https://anchoredcoffee.com/collections/all-coffee" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/anchored.png" alt="Anchored Coffee" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://september.coffee/en-us/collections/coffee" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/september.png" alt="September Coffee" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://www.quietlycoffee.com/collections/our-coffee" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/quietrly.png" alt="Quietly Coffee" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://www.moduscoffee.com/shop/" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/modus.png" alt="Modus Coffee" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://monogramcoffee.com/en-us?" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/monogram.png" alt="Monogram Coffee" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://thombargen.com/collections/frontpage" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/thom-bargen.png" alt="Thom Bargen Coffee Roasters" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://javaroasters.ca/collections/coffee" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/java.png" alt="Java Coffee Roasters" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://junglelivraisoncafe.com/collections/classics" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/jungle.png" alt="Jungle Coffee" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://ethicaroasters.com/collections/shop-all" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/ethica.png" alt="Ethica Coffee Roasters" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://yamabikocoffeeroasters.com/collections/all" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/yamabiko.png" alt="Yamabiko Coffee Roasters" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://cafepista.com/en/collections/sacs" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/pista.png" alt="Café Pista" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://www.trafficcoffee.com/" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/traffic.png" alt="Traffic Coffee" />
+            </div>
+          </a>
+        </div>
+      </div><!-- end of shelfPage -->
+    </div><!-- end of container -->
+
+    <!-- JavaScript -->
+    <script src="script.js?v=20241126z"></script>
+  </body>
+</html>
