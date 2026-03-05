@@ -694,6 +694,9 @@ html { overflow-x: hidden; }
   box-shadow: none;
   margin: 1rem auto;
   position: relative;
+  content-visibility: auto;
+  contain: layout paint style;
+  contain-intrinsic-size: 1200px 1600px;
 }
 .food-menu-image {
   display: block;

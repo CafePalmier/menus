@@ -757,7 +757,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let menuIcons = [];
   let iconRotationScheduled = false;
   const scrollContainer = foodPage || document.documentElement;
-  let iconMotionEnabled = window.innerWidth >= 700;
+  let iconMotionEnabled = window.innerWidth >= 1024;
 
   function getScrollTop() {
     if (foodPage) return foodPage.scrollTop;
@@ -1140,7 +1140,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   window.addEventListener('resize', () => {
     const prev = iconMotionEnabled;
-    iconMotionEnabled = window.innerWidth >= 700;
+    iconMotionEnabled = window.innerWidth >= 1024;
     collectMenuIcons();
     if (iconMotionEnabled || prev !== iconMotionEnabled) {
       updateIconRotation();
