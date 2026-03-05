@@ -724,6 +724,7 @@ html { overflow-x: hidden; }
   transform-origin: center;
   will-change: transform;
   transform: translateZ(0);
+  transition: transform 120ms linear;
 }
 .icon-gravlax {
   width: clamp(117px, 27.5vw, 202px);

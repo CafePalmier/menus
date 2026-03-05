@@ -757,6 +757,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let menuIcons = [];
   let iconRotationScheduled = false;
   const scrollContainer = foodPage || document.documentElement;
+  let iconMotionEnabled = window.innerWidth >= 700;
 
   function getScrollTop() {
     if (foodPage) return foodPage.scrollTop;
@@ -769,7 +770,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateIconRotation() {
-    if (!menuIcons.length) return;
+    if (!iconMotionEnabled || !menuIcons.length) return;
     const vh = getViewportHeight() || 1;
     const scrollTop = getScrollTop();
     menuIcons.forEach((icon) => {
@@ -781,11 +782,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function scheduleIconRotation() {
-    if (iconRotationScheduled) return;
+  let lastRotationTs = 0;
+  const ROTATION_FRAME_MS = 100; // ~10 fps to keep it light
+
+  function scheduleIconRotation(timestamp) {
+    if (!iconMotionEnabled || iconRotationScheduled) return;
     iconRotationScheduled = true;
-    requestAnimationFrame(() => {
+    requestAnimationFrame((ts) => {
       iconRotationScheduled = false;
+      const now = ts || performance.now();
+      if (now - lastRotationTs < ROTATION_FRAME_MS) return;
+      lastRotationTs = now;
       updateIconRotation();
     });
   }
@@ -1132,8 +1139,12 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', scheduleIconRotation, { passive: true });
   }
   window.addEventListener('resize', () => {
+    const prev = iconMotionEnabled;
+    iconMotionEnabled = window.innerWidth >= 700;
     collectMenuIcons();
-    updateIconRotation();
+    if (iconMotionEnabled || prev !== iconMotionEnabled) {
+      updateIconRotation();
+    }
   });
 
   setLanguage('en');
