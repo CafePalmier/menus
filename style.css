@@ -692,20 +692,20 @@ html { overflow-x: hidden; }
 .food-menu-image {
   display: block;
   width: 100%;
-  max-width: 640px;
+  max-width: 760px;
   margin: 0 auto 1.2rem;
   border-radius: 0;
   box-shadow: none;
   background: transparent;
 }
 .food-menu {
-  padding-left: 0.6rem;
-  padding-right: 0.6rem;
+  padding-left: 0.05rem;
+  padding-right: 0.05rem;
 }
 @media (min-width: 540px) {
   .food-menu {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
   }
 }
 .food-menu-image.stacked {
@@ -718,12 +718,12 @@ html { overflow-x: hidden; }
   transform-origin: center;
 }
 .icon-gravlax {
-  width: clamp(96px, 23vw, 167px);
-  bottom: calc(-10px - 1.5cm);
+  width: clamp(117px, 27.5vw, 202px);
+  bottom: calc(-10px - 1cm);
   right: -2vw;
 }
 .icon-pancakes {
-  width: clamp(101px, 24vw, 176px);
+  width: clamp(111px, 26vw, 194px);
   bottom: calc(-8px - 1.5cm);
   right: -2vw;
 }
@@ -739,7 +739,7 @@ html { overflow-x: hidden; }
 }
 .icon-poptart {
   width: clamp(100px, 24vw, 170px);
-  bottom: calc(-10px - 2cm);
+  bottom: calc(-10px - 1.5cm);
   right: -1.5vw;
 }
 
