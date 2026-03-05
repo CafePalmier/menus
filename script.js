@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     full: {
       sections: [
         { key: 'toast',        labels: { en: 'Toast',               fr: 'Toast' } },
-        { key: 'french_toast', labels: { en: 'French Toast & More', fr: 'Pain Doré & Plus' } },
+        { key: 'french_toast', labels: { en: 'French Toast…', fr: 'Pain doré…' } },
         { key: 'bowls',        labels: { en: 'Bowls',               fr: 'Bols' } },
         { key: 'soup',         labels: { en: 'Seasonal Soup',       fr: 'Soupe de saison' } },
         { key: 'sandwich',     labels: { en: 'Sandwich',            fr: 'Sandwich' } },
