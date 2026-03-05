@@ -758,6 +758,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let iconRotationScheduled = false;
 
   function updateIconRotation() {
+    if (!menuIcons.length) return;
     const vh = window.innerHeight || 1;
     menuIcons.forEach((icon) => {
       const rect = icon.getBoundingClientRect();
@@ -1104,9 +1105,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  window.addEventListener('scroll', scheduleIconRotation, { passive: true });
   if (foodPage) {
     foodPage.addEventListener('scroll', scheduleIconRotation, { passive: true });
+  } else {
+    window.addEventListener('scroll', scheduleIconRotation, { passive: true });
   }
   window.addEventListener('resize', updateIconRotation);
 

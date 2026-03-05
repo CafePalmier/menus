@@ -692,7 +692,7 @@ html { overflow-x: hidden; }
 .food-menu-image {
   display: block;
   width: 100%;
-  max-width: 760px;
+  max-width: 900px;
   margin: 0 auto 1.2rem;
   border-radius: 0;
   box-shadow: none;
@@ -704,8 +704,8 @@ html { overflow-x: hidden; }
 }
 @media (min-width: 540px) {
   .food-menu {
-    padding-left: 0.2rem;
-    padding-right: 0.2rem;
+    padding-left: 0.15rem;
+    padding-right: 0.15rem;
   }
 }
 .food-menu-image.stacked {
@@ -716,6 +716,8 @@ html { overflow-x: hidden; }
   z-index: 3;
   pointer-events: none;
   transform-origin: center;
+  will-change: transform;
+  transform: translateZ(0);
 }
 .icon-gravlax {
   width: clamp(117px, 27.5vw, 202px);
