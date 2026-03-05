@@ -694,9 +694,7 @@ html { overflow-x: hidden; }
   box-shadow: none;
   margin: 1rem auto;
   position: relative;
-  content-visibility: auto;
-  contain: layout paint style;
-  contain-intrinsic-size: 1200px 1600px;
+  overflow: visible;
 }
 .food-menu-image {
   display: block;
@@ -722,7 +720,7 @@ html { overflow-x: hidden; }
 }
 .menu-icon {
   position: absolute;
-  z-index: 3;
+  z-index: 6;
   pointer-events: none;
   transform-origin: center;
   will-change: transform;

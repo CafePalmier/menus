@@ -757,7 +757,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let menuIcons = [];
   let iconRotationScheduled = false;
   const scrollContainer = foodPage || document.documentElement;
-  let iconMotionEnabled = window.innerWidth >= 1024;
+  let iconMotionEnabled = true;
 
   function getScrollTop() {
     if (foodPage) return foodPage.scrollTop;
@@ -783,7 +783,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   let lastRotationTs = 0;
-  const ROTATION_FRAME_MS = 100; // ~10 fps to keep it light
+  const ROTATION_FRAME_MS = 120; // ~8 fps to keep it light
 
   function scheduleIconRotation(timestamp) {
     if (!iconMotionEnabled || iconRotationScheduled) return;
@@ -1139,12 +1139,8 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', scheduleIconRotation, { passive: true });
   }
   window.addEventListener('resize', () => {
-    const prev = iconMotionEnabled;
-    iconMotionEnabled = window.innerWidth >= 1024;
     collectMenuIcons();
-    if (iconMotionEnabled || prev !== iconMotionEnabled) {
-      updateIconRotation();
-    }
+    updateIconRotation();
   });
 
   setLanguage('en');
