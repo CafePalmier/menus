@@ -47,183 +47,80 @@ document.addEventListener('DOMContentLoaded', () => {
       ],
       menus: {
         en: `
-      <section id="food-toast-en" class="menu-section" data-section-key="toast">
+      <section id="food-toast-en" class="menu-section image-card" data-section-key="toast">
         <h2 class="sr-only">Toast</h2>
-        <h3 class="wrap-price"><span class="title-group"><span class="title">MUSHROOMS ON TOAST</span><span class="menu-tag legend-pill pill-vegetarian">V</span></span><span class="price">$22</span></h3>
-        <p>country bread, whipped herby cream cheese, sautéed Le Coprin mushrooms, micro greens, shaved parmesan, poached egg.</p>
-
-        <h3>SALMON GRAVLAX <span class="price">$22</span></h3>
-        <p>country bread, herby cream cheese, beet mash, micro-greens, salmon gravlax, pickled cucumber, pickled onion, dill</p>
-
-        <h3>AVOCADO <span class="menu-tag legend-pill pill-vegan">V</span><span class="price">$17</span></h3>
-        <p>country bread, vegan garlic mayo, avocado, cherry tomatoes, flaky salt, pepper, and basil oil. Add bacon and/or an egg! ($)</p>
+        <img src="Assets/menus/food/eng/toasts-eng.png" alt="Toasts menu" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/icons/gravlax.png" alt="" aria-hidden="true" class="menu-icon icon-gravlax" />
       </section>
 
-      <section id="food-french-en" class="menu-section" data-section-key="french_toast">
+      <section id="food-french-en" class="menu-section image-card" data-section-key="french_toast">
         <h2 class="sr-only">French Toast &amp; More</h2>
-        <h3>CRÈME BRULÉE <span class="menu-tag legend-pill pill-vegetarian">V</span><span class="price">$16</span></h3>
-        <p>french toast with vanilla bean crème anglaise, brûléed sugar and berries</p>
-        <p><strong>$1.50</strong> side of maple syrup.</p>
-
-        <h3>CHEZ EDGAR <span class="price">$21</span></h3>
-        <p>french toast with brown butter apple compote, Balderson cheddar, crispy pork belly, one sunny egg, blueberries and maple syrup.</p>
-
-        <h3 class="wrap-price"><span class="title-group"><span class="title">PANCAKE STACK</span><span class="menu-tag legend-pill pill-vegetarian">V</span></span><span class="price">$14</span></h3>
-        <p>three large Henrietta buttermilk pancakes with fresh berries, butter and maple syrup.</p>
+        <img src="Assets/menus/food/eng/french-toasts.png" alt="French toast and more menu" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/icons/pancakes.png" alt="" aria-hidden="true" class="menu-icon icon-pancakes" />
       </section>
 
-      <section id="food-bowls-en" class="menu-section" data-section-key="bowls">
+      <section id="food-bowls-en" class="menu-section image-card" data-section-key="bowls">
         <h2 class="sr-only">Bowls</h2>
-        <h3>THE STAFF MEAL <span class="price">$22</span></h3>
-        <p>two eggs sunnyside, seasonal salad, avocado, country bread with herby cream cheese, bacon.</p>
-
-        <h3>PALMIER POKE BOWL <span class="menu-tag legend-pill pill-gf">GF</span><span class="price">$22</span></h3>
-        <p>brown rice, tuna, avocado, seasonal salad, spicy mayo, seedy sprinkle. <em>*Available vegan with chickpea salad.</em></p>
-
-        <h3 class="wrap-price"><span class="title-group"><span class="title">SHAKSHUKA</span><span class="menu-tag legend-pill pill-vegetarian">V</span></span><span class="price">$18</span></h3>
-        <p>spicy tomato and red pepper sauce, poached eggs, parmesan cheese, greens, country bread toasted with butter.</p>
-
-        <h3 class="wrap-price"><span class="title-group"><span class="title">BROWN RICE PORRIDGE</span><span class="menu-tag legend-pill pill-gf">GF</span><span class="menu-tag legend-pill pill-vegan">V</span></span><span class="price">$14</span></h3>
-        <p>brown rice and coconut milk porridge, almond butter, jam, toasted almonds, brûléed banana, cacao nibs, berries, seedy sprinkle</p>
-
-        <h3>YOGURT &amp; GRANOLA <span class="menu-tag legend-pill pill-vegetarian">V</span><span class="price">$14</span></h3>
-        <p>yogurt, granola, fresh fruit, seasonal compote, brûléed banana, maple syrup and a seedy sprinkle</p>
-
-        <h3>BROWN RICE CONGEE <span class="menu-tag legend-pill pill-gf">GF</span><span class="price">$18</span></h3>
-        <p>brown rice miso congee, shiitake mushrooms, poached egg, chili crisp, sesame oil, nori, cured egg yolk, pork belly</p>
+        <img src="Assets/menus/food/eng/bowls.png" alt="Bowls menu" class="food-menu-image" loading="lazy" />
       </section>
 
-      <section id="food-soup-en" class="menu-section" data-section-key="soup">
+      <section id="food-soup-en" class="menu-section image-card" data-section-key="soup">
         <h2 class="sr-only">Seasonal Soup</h2>
-        <h3>Seasonal Soup <span class="menu-tag legend-pill pill-gf">GF</span><span class="menu-tag legend-pill pill-vegan">V</span><span class="price">$10</span></h3>
-        <p>Ask about our seasonal soup.</p>
+        <img src="Assets/menus/food/eng/soup-eng.png" alt="Seasonal soup menu" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/icons/breakfastsandwich.png" alt="" aria-hidden="true" class="menu-icon icon-breakfast-left" />
       </section>
 
-      <section id="food-sandwich-en" class="menu-section" data-section-key="sandwich">
+      <section id="food-sandwich-en" class="menu-section image-card" data-section-key="sandwich">
         <h2 class="sr-only">Sandwich</h2>
-        <h3 class="wrap-price"><span class="title-group"><span class="title">BREAKFAST SANDWICH</span><span class="menu-tag legend-pill pill-vegetarian">V</span></span><span class="price">$12</span></h3>
-        <p>brioche bun, smoked cheddar cheese, vegan garlic mayo, avocado, sunny egg, pickled onion, micro-greens</p>
-        <p>Add bacon or sausage!($)</p>
-
-        <h3 class="wrap-price"><span class="title">DELI SANDWICH</span><span class="price">$16</span></h3>
-        <p>ciabatta, smoked turkey, salami, capocollo ham, provolone, vegan garlic mayo, dijon mustard, banana pepper, micro-greens</p>
-
-        <h3 class="wrap-price"><span class="title-group"><span class="title">VEGGIE SANDWICH</span><span class="menu-tag legend-pill pill-vegetarian">V</span></span><span class="price">$14</span></h3>
-        <p>ciabatta, smoked cheddar cheese, vegan garlic mayo, avocado, chickpea salad, pickled onion, micro-greens</p>
+        <img src="Assets/menus/food/eng/sandwiches.png" alt="Sandwich menu" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/icons/poptart.png" alt="" aria-hidden="true" class="menu-icon icon-poptart" />
       </section>
 
-      <section id="food-alacarte-en" class="menu-section" data-section-key="a_la_carte">
-        <h2>À la carte</h2>
-        <dl class="menu-addons">
-          <dt>SALAD</dt><dd>$10.00</dd>
-          <dt>BACON</dt><dd>$4.00</dd>
-          <dt>HOUSE MADE TURKEY SAUSAGE</dt><dd>$6.00</dd>
-          <dt>BREAD</dt><dd>$2.50</dd>
-          <dt>EGG</dt><dd>$2.50</dd>
-          <dt>PANCAKE (1)</dt><dd>$4.00</dd>
-        </dl>
-        <h3>Add to Any meal</h3>
-        <dl class="menu-addons" data-section-anchor="a_la_carte">
-          <dt>Salad</dt><dd>$6.00</dd>
-          <dt>Bacon</dt><dd>$3.00</dd>
-          <dt>House Made Turkey Sausage</dt><dd>$4.00</dd>
-          <dt>Bread</dt><dd>$2.50</dd>
-          <dt>Gluten Free Bread</dt><dd>$1.50</dd>
-          <dt>Egg</dt><dd>$1.50</dd>
-        </dl>
-        <div class="section-spacer" aria-hidden="true"></div>
+      <section id="food-alacarte-en" class="menu-section image-card" data-section-key="a_la_carte">
+        <h2 class="sr-only">À la carte</h2>
+        <img src="Assets/menus/food/eng/a-la-carte-eng.png" alt="À la carte menu" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/eng/add.png" alt="Add-ons menu" class="food-menu-image stacked" loading="lazy" />
       </section>
     `,
         fr: `
-      <section id="food-toast-fr" class="menu-section" data-section-key="toast">
+      <section id="food-toast-fr" class="menu-section image-card" data-section-key="toast">
         <h2 class="sr-only">Toast</h2>
-        <h3 class="wrap-price"><span class="title-group"><span class="title">"TOAST" AUX CHAMPIGNONS</span><span class="menu-tag legend-pill pill-vegetarian">V</span></span><span class="price">$22</span></h3>
-        <p>pain de campagne, fromage à la crème aux fines herbes, champignons Le Coprin sautés au beurre, micro-pousses, parmesan râpé, oeuf poché.</p>
-
-        <h3>GRAVLAX DE SAUMON <span class="price">$22</span></h3>
-        <p>pain de campagne, fromage à la crème aux herbes, purée de betterave, micro-pousses, saumon gravlax, concombre mariné, oignon mariné, aneth.</p>
-
-        <h3>AVOCAT <span class="menu-tag legend-pill pill-vegan">V</span><span class="price">$17</span></h3>
-        <p>pain de campagne, mayo à l'ail végétalienne, avocat, tomates cerises, sel, poivre et huile de basilic. Ajouter bacon et/ou un oeuf! ($)</p>
+        <img src="Assets/menus/food/fra/toasts-fra.png" alt="Menu Toasts" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/icons/gravlax.png" alt="" aria-hidden="true" class="menu-icon icon-gravlax" />
       </section>
 
-      <section id="food-french-fr" class="menu-section" data-section-key="french_toast">
+      <section id="food-french-fr" class="menu-section image-card" data-section-key="french_toast">
         <h2 class="sr-only">Pain Doré &amp; Plus</h2>
-        <h3>CRÈME BRULÉE <span class="menu-tag legend-pill pill-vegetarian">V</span><span class="price">$16</span></h3>
-        <p>pain doré avec crème anglaise à la vanille, sucre brûlé et baies.</p>
-        <p><strong>$1.50</strong> accompagnement de sirop d'érable.</p>
-
-        <h3>CHEZ EDGAR <span class="price">$21</span></h3>
-        <p>pain doré avec compote de pommes au beurre noisette, cheddar Balderson, poitrine de porc croustillante, oeuf miroir, bleuets et sirop d'érable.</p>
-
-        <h3 class="wrap-price"><span class="title-group"><span class="title">PANCAKES EN PILE</span><span class="menu-tag legend-pill pill-vegetarian">V</span></span><span class="price">$14</span></h3>
-        <p>trois grands pancakes au babeurre Henrietta, servis avec petits fruits frais, beurre et sirop d'érable.</p>
+        <img src="Assets/menus/food/fra/pain-dores.png" alt="Menu pain doré et plus" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/icons/pancakes.png" alt="" aria-hidden="true" class="menu-icon icon-pancakes" />
       </section>
 
-      <section id="food-bowls-fr" class="menu-section" data-section-key="bowls">
+      <section id="food-bowls-fr" class="menu-section image-card" data-section-key="bowls">
         <h2 class="sr-only">Bols</h2>
-        <h3>LE "STAFF MEAL" <span class="price">$22</span></h3>
-        <p>deux oeufs miroirs, salade saisonnière, avocat, pain de campagne avec fromage à la crème aux herbes, bacon.</p>
-
-        <h3>BOL POKE PALMIER <span class="menu-tag legend-pill pill-gf">SG</span><span class="price">$22</span></h3>
-        <p>riz brun, thon, avocat, salade saisonnière, mayo épicé, mélange de grains. <em>Option végétalienne avec salade de pois chiches.</em></p>
-
-        <h3 class="wrap-price"><span class="title-group"><span class="title">SHAKSHUKA</span><span class="menu-tag legend-pill pill-vegetarian">V</span></span><span class="price">$18</span></h3>
-        <p>sauce piquante aux tomates et poivrons rouges, oeufs pochés, fromage parmesan, micro-pousses, pain de campagne au beurre.</p>
-
-        <h3 class="wrap-price"><span class="title-group"><span class="title">GRUAU AU RIZ BRUN</span><span class="menu-tag legend-pill pill-gf">SG</span><span class="menu-tag legend-pill pill-vegan">V</span></span><span class="price">$14</span></h3>
-        <p>gruau au riz brun et lait de noix de coco, beurre d'amandes, confiture, amandes grillées, banane brûlée, cacao, baies, mélange de grains.</p>
-
-        <h3>YOGOURT &amp; GRANOLA <span class="menu-tag legend-pill pill-vegetarian">V</span><span class="price">$14</span></h3>
-        <p>yogourt, granola, fruits frais, compote de saison, banane brûlée, sirop d'érable, mélange de grains.</p>
-
-        <h3>CONGEE DE RIZ BRUN <span class="menu-tag legend-pill pill-gf">SG</span><span class="price">$18</span></h3>
-        <p>congee miso au riz brun, champignons shiitake, oeuf poché, chili croustillant, huile de sésame, nori, jaune d'oeuf salé, poitrine de porc.</p>
+        <img src="Assets/menus/food/fra/bols.png" alt="Menu bols" class="food-menu-image" loading="lazy" />
       </section>
 
-      <section id="food-soup-fr" class="menu-section" data-section-key="soup">
-        <h2 class="sr-only">Soupe de saison</h2>
-        <h3>Soupe de saison <span class="menu-tag legend-pill pill-gf">SG</span><span class="menu-tag legend-pill pill-vegan">V</span><span class="price">$10</span></h3>
-        <p>Demandez-nous quelle est notre soupe de saison.</p>
+      <section id="food-soup-fr" class="menu-section image-card" data-section-key="soup">
+        <h2 class="sr-only">Soupe de Saison</h2>
+        <img src="Assets/menus/food/fra/soupe.png" alt="Menu soupe de saison" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/icons/breakfastsandwich.png" alt="" aria-hidden="true" class="menu-icon icon-breakfast-right" />
       </section>
 
-      <section id="food-sandwich-fr" class="menu-section" data-section-key="sandwich">
+      <section id="food-sandwich-fr" class="menu-section image-card" data-section-key="sandwich">
         <h2 class="sr-only">Sandwich</h2>
-        <h3 class="wrap-price"><span class="title-group"><span class="title">SANDWICH PETIT DÉJEUNER</span><span class="menu-tag legend-pill pill-vegetarian">V</span></span><span class="price">$12</span></h3>
-        <p>petit pain brioche, fromage cheddar fumé, mayo à l'ail végétalienne, avocat, oeuf miroir, oignons marinés, micro-pousses</p>
-        <p>Ajouter bacon ou saucisse!($)</p>
-
-        <h3 class="wrap-price"><span class="title">SANDWICH DELI</span><span class="price">$16</span></h3>
-        <p>ciabatta, dinde fumée, oignons croustillants, dijonnaise, cornichons à l'aneth, cheddar Balderson, moutarde sucrée-épicée.</p>
-
-        <h3 class="wrap-price"><span class="title-group"><span class="title">SANDWICH VÉGÉ</span><span class="menu-tag legend-pill pill-vegetarian">V</span></span><span class="price">$15</span></h3>
-        <p>ciabatta, fromage cheddar fumé, mayo à l'ail végétalienne, avocat, salade de pois chiches, oignons marinés, micro-pousses.</p>
+        <img src="Assets/menus/food/fra/sandwichs.png" alt="Menu sandwichs" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/icons/poptart.png" alt="" aria-hidden="true" class="menu-icon icon-poptart" />
       </section>
 
-      <section id="food-alacarte-fr" class="menu-section" data-section-key="a_la_carte">
-        <h2>À la carte</h2>
-        <dl class="menu-addons">
-          <dt>SALADE</dt><dd>$10.00</dd>
-          <dt>BACON</dt><dd>$4.00</dd>
-          <dt>SAUCISSE DE DINDE FAITE MAISON</dt><dd>$6.00</dd>
-          <dt>PAIN</dt><dd>$2.50</dd>
-          <dt>OEUF</dt><dd>$2.50</dd>
-          <dt>PANCAKE (1)</dt><dd>$4.00</dd>
-        </dl>
-        <h3>Ajouter à un repas</h3>
-        <dl class="menu-addons" data-section-anchor="a_la_carte">
-          <dt>SALADE / SALAD</dt><dd>$6.00</dd>
-          <dt>BACON</dt><dd>$3.00</dd>
-          <dt>SAUCISSE DE DINDE FAITE MAISON / HOUSE MADE TURKEY SAUSAGE</dt><dd>$4.00</dd>
-          <dt>PAIN / BREAD</dt><dd>$2.50</dd>
-          <dt>PAIN SANS GLUTEN / GLUTEN FREE BREAD</dt><dd>$1.50</dd>
-          <dt>OEUF / EGG</dt><dd>$1.50</dd>
-        </dl>
-        <div class="section-spacer" aria-hidden="true"></div>
+      <section id="food-alacarte-fr" class="menu-section image-card" data-section-key="a_la_carte">
+        <h2 class="sr-only">À la carte</h2>
+        <img src="Assets/menus/food/fra/a-la-carte-fra.png" alt="Menu à la carte" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/fra/ajouter.png" alt="Menu ajouter" class="food-menu-image stacked" loading="lazy" />
       </section>
     `
       }
-    },
+    }
+,
     reduced: {
       sections: [
         { key: 'all_day', labels: { en: 'Menu', fr: 'Menu' } },
@@ -233,36 +130,36 @@ document.addEventListener('DOMContentLoaded', () => {
         en: `
       <section id="food-classics-en" class="menu-section" data-section-key="all_day">
         <h2 class="sr-only">All-Day Menu</h2>
-        <h3>Breakfast Sandwich <span class="price">$12</span></h3>
+        <h3>Breakfast Sandwich <span class="price">12</span></h3>
         <p>brioche bun, smoked cheddar cheese, vegan garlic mayo, avocado, sunny egg, pickled onion, micro-greens.</p>
-        <p><strong>Option:</strong> Add bacon or sausage! ($)</p>
+        <p><strong>Option:</strong> Add bacon or sausage! (+)</p>
 
-        <h3>Smash Burger <span class="price">$14</span></h3>
+        <h3>Smash Burger <span class="price">16</span></h3>
         <p>brioche bun, butter, two smash patties, onion, house burger sauce, house garlic dill pickles, cheddar cheese.</p>
 
-        <h3>Classic French Toast <span class="price">$17</span></h3>
+        <h3>Classic French Toast <span class="price">19</span></h3>
         <p>french toast with cinnamon sugar, seasonal compote, fresh berries and maple syrup.</p>
 
-        <h3>Staff Meal <span class="price">$22</span></h3>
+        <h3>Staff Meal <span class="price">24</span></h3>
         <p>two eggs sunnyside, seasonal salad, avocado, country bread with herby cream cheese, bacon.</p>
 
-        <h3>Deli Sandwich <span class="price">$16</span></h3>
+        <h3>Deli Sandwich <span class="price">17</span></h3>
         <p>ciabatta, smoked turkey, salami, capocollo ham, provolone, vegan garlic mayo, dijon mustard, banana pepper, micro-greens.</p>
 
-        <h3>Veggie Sandwich <span class="price">$14</span></h3>
+        <h3>Veggie Sandwich <span class="price">15</span></h3>
         <p>ciabatta, smoked cheddar cheese, vegan garlic mayo, avocado, chickpea salad, pickled onion, micro-greens.</p>
 
-        <h3>Avocado Toast <span class="price">$17</span></h3>
+        <h3>Avocado Toast <span class="price">18</span></h3>
         <p>country bread, vegan garlic mayo, avocado, cherry tomatoes, flaky salt, pepper, and basil oil.</p>
-        <p><strong>Option:</strong> Add bacon and/or an egg! ($).</p>
+        <p><strong>Option:</strong> Add bacon and/or an egg! (+).</p>
 
-        <h3>Palmier Poke Bowl <span class="price">$22</span></h3>
+        <h3>Palmier Poke Bowl <span class="price">25</span></h3>
         <p>brown rice, tuna, avocado, seasonal salad, spicy mayo. Available vegan with chickpea salad.</p>
 
-        <h3>Yogurt &amp; Granola <span class="price">$14</span></h3>
+        <h3>Yogurt &amp; Granola <span class="price">16</span></h3>
         <p>yogurt, granola, fresh fruit, seasonal compote, brûléed banana, maple syrup and a seedy sprinkle</p>
 
-        <h3>Chia <span class="price">$14</span></h3>
+        <h3>Chia <span class="price">14</span></h3>
         <p>strawberry and matcha chia pudding, black pepper strawberry coulis, fresh berries, and shredded coconut.</p>
       </section>
 
@@ -270,12 +167,12 @@ document.addEventListener('DOMContentLoaded', () => {
         <h2 class="sr-only">À la carte</h2>
         <h3>À La Carte (Add)</h3>
         <dl class="menu-addons">
-          <dt>Salad</dt><dd>$10.00 or $6.00</dd>
-          <dt>Bacon</dt><dd>$4.00 or $3.00</dd>
-          <dt>House Made Turkey Sausage</dt><dd>$6.00 or $4.00</dd>
-          <dt>Bread</dt><dd>$2.50</dd>
-          <dt>Gluten Free Bread</dt><dd>$1.50</dd>
-          <dt>Egg</dt><dd>$2.50 or $1.50</dd>
+          <dt>Salad</dt><dd>10.00 or 6.00</dd>
+          <dt>Bacon</dt><dd>4.00 or 3.00</dd>
+          <dt>House Made Turkey Sausage</dt><dd>6.00 or 4.00</dd>
+          <dt>Bread</dt><dd>2.50</dd>
+          <dt>Gluten Free Bread</dt><dd>1.50</dd>
+          <dt>Egg</dt><dd>2.50 or 1.50</dd>
         </dl>
         <div class="section-spacer" aria-hidden="true"></div>
       </section>
@@ -283,36 +180,36 @@ document.addEventListener('DOMContentLoaded', () => {
         fr: `
       <section id="food-classics-fr" class="menu-section" data-section-key="all_day">
         <h2 class="sr-only">Menu toute la journée</h2>
-        <h3>Sandwich<br />Petit-Déjeuner <span class="price">$12</span></h3>
+        <h3>Sandwich<br />Petit-Déjeuner <span class="price">12</span></h3>
         <p>petit pain brioche, fromage cheddar fumé, mayo à l'ail végétalienne, avocat, oeuf miroir, oignons marinés, micro-pousses.</p>
-        <p><strong>Option :</strong> Ajouter bacon ou saucisse! ($)</p>
+        <p><strong>Option :</strong> Ajouter bacon ou saucisse! (+)</p>
 
-        <h3>"Smash Burger" <span class="price">$14</span></h3>
+        <h3>"Smash Burger" <span class="price">16</span></h3>
         <p>pain brioché, beurre, deux boulettes smash, oignon, sauce maison, cornichons maison à l'ail et à l'aneth, cheddar.</p>
 
-        <h3>Classique Pain Doré <span class="price">$17</span></h3>
+        <h3>Classique Pain Doré <span class="price">19</span></h3>
         <p>pain doré avec sucre à la cannelle, compote de saison, baies fraîches, et sirop d'érable.</p>
 
-        <h3>Le "Staff Meal" <span class="price">$22</span></h3>
+        <h3>Le "Staff Meal" <span class="price">24</span></h3>
         <p>deux oeufs miroirs, salade saisonnière, avocat, pain de campagne avec fromage à la crème aux herbes, bacon.</p>
 
-        <h3>Sandwich Deli <span class="price">$16</span></h3>
+        <h3>Sandwich Deli <span class="price">17</span></h3>
         <p>ciabatta, dinde fumée, salami, jambon capocollo, fromage provolone, mayo à l'ail végétalienne, moutarde dijon, piments forts, micro-pousses.</p>
 
-        <h3>Sandwich Végé <span class="price">$14</span></h3>
+        <h3>Sandwich Végé <span class="price">15</span></h3>
         <p>ciabatta, fromage cheddar fumé, mayo à l'ail végétalienne, avocat, salade de pois chiches, oignons marinés, micro-pousses.</p>
 
-        <h3>"Toast" Avocat <span class="price">$17</span></h3>
+        <h3>"Toast" Avocat <span class="price">18</span></h3>
         <p>pain de campagne, mayo à l'ail végétalienne, avocat, tomates cerises, sel, poivre et huile de basilic.</p>
-        <p><strong>Option :</strong> Ajouter bacon et/ou un oeuf! ($).</p>
+        <p><strong>Option :</strong> Ajouter bacon et/ou un oeuf! (+).</p>
 
-        <h3>Bol Poke Palmier <span class="price">$22</span></h3>
+        <h3>Bol Poke Palmier <span class="price">25</span></h3>
         <p>riz sushi, thon, avocat, salade saisonnière, mayo épicé. *option végétalienne avec salade de pois chiches.</p>
 
-        <h3>Yogourt &amp; Granola <span class="price">$14</span></h3>
+        <h3>Yogourt &amp; Granola <span class="price">16</span></h3>
         <p>yogourt, granola, fruits frais, compote de saison, banane brûlée, sirop d'érable, et mélange de grains</p>
 
-        <h3>Chia <span class="price">$14</span></h3>
+        <h3>Chia <span class="price">14</span></h3>
         <p>pudding aux fraises et au chia matcha, coulis de fraises au poivre noir, baies fraîches et noix de coco râpée.</p>
       </section>
 
@@ -320,12 +217,12 @@ document.addEventListener('DOMContentLoaded', () => {
         <h2 class="sr-only">À la carte</h2>
         <h3>À La Carte (Ajouter)</h3>
         <dl class="menu-addons">
-          <dt>Salade</dt><dd>$10.00 ou $6.00</dd>
-          <dt>Bacon</dt><dd>$4.00 ou $3.00</dd>
-          <dt>Saucisse de dinde faite maison</dt><dd>$6.00 ou $4.00</dd>
-          <dt>Pain</dt><dd>$2.50</dd>
-          <dt>Pain sans gluten</dt><dd>$1.50</dd>
-          <dt>Oeuf</dt><dd>$2.50 ou $1.50</dd>
+          <dt>Salade</dt><dd>10.00 ou 6.00</dd>
+          <dt>Bacon</dt><dd>4.00 ou 3.00</dd>
+          <dt>Saucisse de dinde faite maison</dt><dd>6.00 ou 4.00</dd>
+          <dt>Pain</dt><dd>2.50</dd>
+          <dt>Pain sans gluten</dt><dd>1.50</dd>
+          <dt>Oeuf</dt><dd>2.50 ou 1.50</dd>
         </dl>
         <div class="section-spacer" aria-hidden="true"></div>
       </section>
@@ -547,6 +444,7 @@ document.addEventListener('DOMContentLoaded', () => {
     foodMenuFr.hidden = currentLang !== 'fr';
     ensureValidFoodSectionKey();
     updateFoodSectionFromScroll();
+    collectMenuIcons();
   }
 
   function setLegendLanguage() {
@@ -856,6 +754,37 @@ document.addEventListener('DOMContentLoaded', () => {
   const foodSectionLabel = document.getElementById('foodSectionLabel');
   const foodSectionList = document.getElementById('foodSectionList');
   const foodHeader = document.querySelector('#foodPage .food-header');
+  let menuIcons = [];
+  let iconRotationScheduled = false;
+
+  function updateIconRotation() {
+    const vh = window.innerHeight || 1;
+    menuIcons.forEach((icon) => {
+      const rect = icon.getBoundingClientRect();
+      const centerY = rect.top + rect.height / 2;
+      const progress = Math.min(Math.max(centerY / vh, 0), 1); // 1 at bottom, 0 at top
+      const angle = -45 * progress; // 0° at top, -45° at bottom
+      icon.style.transform = `rotate(${angle}deg)`;
+    });
+  }
+
+  function scheduleIconRotation() {
+    if (iconRotationScheduled) return;
+    iconRotationScheduled = true;
+    requestAnimationFrame(() => {
+      iconRotationScheduled = false;
+      updateIconRotation();
+    });
+  }
+
+  function collectMenuIcons() {
+    menuIcons = Array.from(document.querySelectorAll('.menu-icon'));
+    document.querySelectorAll('.food-menu-image').forEach((img) => {
+      img.addEventListener('load', scheduleIconRotation, { once: true, passive: true });
+    });
+    updateIconRotation();
+    requestAnimationFrame(updateIconRotation);
+  }
 
   let foodSectionDropdownOpen = false;
 
@@ -1174,6 +1103,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  window.addEventListener('scroll', scheduleIconRotation, { passive: true });
+  if (foodPage) {
+    foodPage.addEventListener('scroll', scheduleIconRotation, { passive: true });
+  }
+  window.addEventListener('resize', updateIconRotation);
 
   setLanguage('en');
 });
