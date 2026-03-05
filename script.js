@@ -756,13 +756,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const foodHeader = document.querySelector('#foodPage .food-header');
   let menuIcons = [];
   let iconRotationScheduled = false;
+  const scrollContainer = foodPage || document.documentElement;
+
+  function getScrollTop() {
+    if (foodPage) return foodPage.scrollTop;
+    return window.pageYOffset || document.documentElement.scrollTop || 0;
+  }
+
+  function getViewportHeight() {
+    if (foodPage) return foodPage.clientHeight || window.innerHeight || 1;
+    return window.innerHeight || 1;
+  }
 
   function updateIconRotation() {
     if (!menuIcons.length) return;
-    const vh = window.innerHeight || 1;
+    const vh = getViewportHeight() || 1;
+    const scrollTop = getScrollTop();
     menuIcons.forEach((icon) => {
-      const rect = icon.getBoundingClientRect();
-      const centerY = rect.top + rect.height / 2;
+      const anchor = parseFloat(icon.dataset.anchor || '0');
+      const centerY = anchor - scrollTop;
       const progress = Math.min(Math.max(centerY / vh, 0), 1); // 1 at bottom, 0 at top
       const angle = -45 * progress; // 0° at top, -45° at bottom
       icon.style.transform = `rotate(${angle}deg)`;
@@ -780,8 +792,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function collectMenuIcons() {
     menuIcons = Array.from(document.querySelectorAll('.menu-icon'));
+    const scrollTop = getScrollTop();
+    menuIcons.forEach((icon) => {
+      const rect = icon.getBoundingClientRect();
+      const anchor = rect.top + scrollTop + rect.height / 2;
+      icon.dataset.anchor = anchor;
+    });
     document.querySelectorAll('.food-menu-image').forEach((img) => {
-      img.addEventListener('load', scheduleIconRotation, { once: true, passive: true });
+      img.addEventListener('load', () => {
+        collectMenuIcons();
+        scheduleIconRotation();
+      }, { once: true, passive: true });
     });
     updateIconRotation();
     requestAnimationFrame(updateIconRotation);
@@ -1110,7 +1131,10 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     window.addEventListener('scroll', scheduleIconRotation, { passive: true });
   }
-  window.addEventListener('resize', updateIconRotation);
+  window.addEventListener('resize', () => {
+    collectMenuIcons();
+    updateIconRotation();
+  });
 
   setLanguage('en');
 });
