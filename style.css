@@ -36,7 +36,9 @@ body {
   color: var(--color-green);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
+html { overflow-x: hidden; }
 
 /* Language switcher styling */
 .language-switcher {
@@ -335,6 +337,7 @@ body {
   transform: translateX(100%);
   transition: transform 0.4s ease;
   overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   padding-bottom: 1rem;
   padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
@@ -550,6 +553,7 @@ body {
 .food-content {
   margin: 0.5rem 1.5rem 2.5rem;
   padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  overflow-x: hidden;
 }
 .food-content .menu-text {
   max-width: 720px;
@@ -714,29 +718,29 @@ body {
   transform-origin: center;
 }
 .icon-gravlax {
-  width: 168px;
-  bottom: calc(-18px - 1cm);
-  right: -18px;
+  width: clamp(96px, 23vw, 167px);
+  bottom: calc(-10px - 1.5cm);
+  right: -2vw;
 }
 .icon-pancakes {
-  width: 154px;
-  bottom: calc(-12px - 2cm);
-  right: -12px;
+  width: clamp(101px, 24vw, 176px);
+  bottom: calc(-8px - 1.5cm);
+  right: -2vw;
 }
 .icon-breakfast-left {
-  width: 150px;
-  bottom: -16px;
-  left: -12px;
+  width: clamp(110px, 25vw, 180px);
+  bottom: calc(-8px - 2vw);
+  left: -2vw;
 }
 .icon-breakfast-right {
-  width: 150px;
-  bottom: -16px;
-  right: -12px;
+  width: clamp(110px, 25vw, 180px);
+  bottom: calc(-8px - 2vw);
+  right: -2vw;
 }
 .icon-poptart {
-  width: 144px;
-  bottom: calc(-14px - 2cm);
-  right: -10px;
+  width: clamp(100px, 24vw, 170px);
+  bottom: calc(-10px - 2cm);
+  right: -1.5vw;
 }
 
 /* Back button */
