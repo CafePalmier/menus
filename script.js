@@ -542,8 +542,7 @@ document.addEventListener('DOMContentLoaded', () => {
       lastTouchTime = Date.now();
       if (moved) return;
       handler(event);
-      event.preventDefault();
-    }, { passive: false });
+    }, { passive: true });
 
     element.addEventListener('touchcancel', () => {
       touchState = null;

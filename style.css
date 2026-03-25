@@ -37,8 +37,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  touch-action: pan-y;
-  overscroll-behavior: contain;
 }
 html { overflow-x: hidden; }
 
@@ -341,7 +339,6 @@ html { overflow-x: hidden; }
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-y;
   overscroll-behavior-x: none;
   padding-bottom: 1rem;
   padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
@@ -753,6 +750,20 @@ html { overflow-x: hidden; }
   right: -1.5vw;
 }
 
+@media (min-width: 900px) {
+  .icon-gravlax {
+    bottom: calc(-10px - 2cm);
+  }
+
+  .icon-pancakes {
+    bottom: calc(-8px - 2.5cm);
+  }
+
+  .icon-poptart {
+    bottom: calc(-10px - 2cm);
+  }
+}
+
 /* Back button */
 .back-button {
   position: relative;
@@ -971,6 +982,17 @@ html { overflow-x: hidden; }
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.4rem;
   margin: 2rem 1rem 0;
+}
+
+@media (min-width: 700px) {
+  .shelf-grid {
+    grid-template-columns: repeat(4, 210px);
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1.25rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
 }
 .shelf-card {
   display: block;
