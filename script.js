@@ -65,8 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
     openIn: { en: 'Open In', fr: 'Ouvrir dans' },
     googleMaps: { en: 'Google Maps', fr: 'Google Maps' },
     appleMaps: { en: 'Apple Maps', fr: 'Plans Apple' },
-    phonePrompt: { en: 'Would you like to call (819) 827-1777?', fr: 'Voulez-vous appeler le (819) 827-1777?' },
-    phoneCallAction: { en: 'Call', fr: 'Appeler' },
     hoursTitle: { en: 'Hours', fr: 'Heures' },
     monday: { en: 'Monday', fr: 'Lundi' },
     tuesday: { en: 'Tuesday', fr: 'Mardi' },
@@ -1120,8 +1118,45 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateCoffeeBuildPreview() {
-    const folder = getCoffeeBuildFolder();
     let selectedBases = Array.isArray(coffeeBuildState.base) ? coffeeBuildState.base : [];
+    const previousImageSrc = coffeeBuildImage?.dataset.imagePath || '';
+    if (selectedBases.includes('tea') && coffeeBuildState.steamedMilk) {
+      coffeeBuildState.steamedMilk = false;
+    }
+    if (isChocolateMilkSelection(selectedBases) && coffeeBuildState.steamedMilk) {
+      coffeeBuildState.steamedMilk = false;
+    }
+    if (coffeeBuildState.steamedMilk && selectedBases.some(base => !['espresso', 'drip'].includes(base))) {
+      coffeeBuildState.base = selectedBases.filter(base => ['espresso', 'drip'].includes(base));
+      if (!coffeeBuildState.base.length) {
+        coffeeBuildState.base = null;
+      }
+      selectedBases = Array.isArray(coffeeBuildState.base) ? coffeeBuildState.base : [];
+    }
+    if (selectedBases.includes('tea') && coffeeBuildState.temperature === 'iced' && coffeeBuildState.teaFlavor && !isIcedTeaFlavorAvailable(coffeeBuildState.teaFlavor)) {
+      coffeeBuildState.teaFlavor = null;
+    }
+    if (isDirtyTeaSelection(selectedBases) && coffeeBuildState.teaFlavor !== 'chai') {
+      coffeeBuildState.teaFlavor = 'chai';
+    }
+    if (!selectedBases.length) {
+      coffeeBuildState.flavor = null;
+      coffeeBuildState.flavorCustomized = false;
+    } else if (selectedBases.includes('tea') && coffeeBuildState.teaFlavor === 'earl-grey' && !coffeeBuildState.flavorCustomized) {
+      coffeeBuildState.flavor = 'vanilla';
+    } else if (selectedBases.includes('tea') && coffeeBuildState.teaFlavor !== 'earl-grey' && !coffeeBuildState.flavorCustomized) {
+      coffeeBuildState.flavor = null;
+    }
+    if (isChocolateMilkSelection(selectedBases) && coffeeBuildState.milkIndex < 1) {
+      coffeeBuildState.milkIndex = 1;
+    }
+    const teaSelected = selectedBases.includes('tea');
+    const teaIcedUnavailable = teaSelected && ['earl-grey', 'serenitea'].includes(coffeeBuildState.teaFlavor);
+    const icedUnavailable = selectedBases.includes('drip') || coffeeBuildState.steamedMilk || teaIcedUnavailable;
+    if (icedUnavailable && coffeeBuildState.temperature === 'iced') {
+      coffeeBuildState.temperature = 'hot';
+    }
+    const folder = getCoffeeBuildFolder();
     const espressoOnly = isEspressoOnlySelection(selectedBases);
     const espressoSelected = selectedBases.includes('espresso');
     const chocolateMilkMode = isChocolateMilkSelection(selectedBases);
@@ -1134,44 +1169,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ? COFFEE_WATER_VALUES_ICE
       : (coffeeBuildState.service === 'stay' ? COFFEE_WATER_VALUES_STAY : COFFEE_WATER_VALUES_TOGO);
     const hasQualifyingBaseForTemperature = selectedBases.some(base => base !== 'drip');
-    const previousImageSrc = coffeeBuildImage?.dataset.imagePath || '';
-    const teaSelected = selectedBases.includes('tea');
-    const espressoWaterMode = espressoOnly && coffeeBuildState.waterIndex > 0;
-    if (teaSelected && coffeeBuildState.steamedMilk) {
-      coffeeBuildState.steamedMilk = false;
-    }
-    if (chocolateMilkMode && coffeeBuildState.steamedMilk) {
-      coffeeBuildState.steamedMilk = false;
-    }
-    if (coffeeBuildState.steamedMilk && selectedBases.some(base => !['espresso', 'drip'].includes(base))) {
-      coffeeBuildState.base = selectedBases.filter(base => ['espresso', 'drip'].includes(base));
-      if (!coffeeBuildState.base.length) {
-        coffeeBuildState.base = null;
-      }
-      selectedBases = Array.isArray(coffeeBuildState.base) ? coffeeBuildState.base : [];
-    }
-    if (teaSelected && isIcedSelection && coffeeBuildState.teaFlavor && !isIcedTeaFlavorAvailable(coffeeBuildState.teaFlavor)) {
-      coffeeBuildState.teaFlavor = null;
-    }
-    if (dirtyTeaMode && coffeeBuildState.teaFlavor !== 'chai') {
-      coffeeBuildState.teaFlavor = 'chai';
-    }
-    if (!selectedBases.length) {
-      coffeeBuildState.flavor = null;
-      coffeeBuildState.flavorCustomized = false;
-    } else if (teaSelected && coffeeBuildState.teaFlavor === 'earl-grey' && !coffeeBuildState.flavorCustomized) {
-      coffeeBuildState.flavor = 'vanilla';
-    } else if (teaSelected && coffeeBuildState.teaFlavor !== 'earl-grey' && !coffeeBuildState.flavorCustomized) {
-      coffeeBuildState.flavor = null;
-    }
-    if (chocolateMilkMode && coffeeBuildState.milkIndex < 1) {
-      coffeeBuildState.milkIndex = 1;
-    }
-    const teaIcedUnavailable = teaSelected && ['earl-grey', 'serenitea'].includes(coffeeBuildState.teaFlavor);
-    const icedUnavailable = selectedBases.includes('drip') || coffeeBuildState.steamedMilk || teaIcedUnavailable;
-    if (icedUnavailable && coffeeBuildState.temperature === 'iced') {
-      coffeeBuildState.temperature = 'hot';
-    }
     const imageSrc = getCoffeeBuildImageSrc(selectedBases, folder);
     if (espressoSelected && !espressoOnly && (coffeeBuildState.bean === 'feature' || !coffeeBuildState.bean)) {
       coffeeBuildState.bean = 'palmier';
@@ -1687,7 +1684,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (coffeeInfoModal && !coffeeInfoModal.hidden) return 'coffee-info';
     if (hoursModal && !hoursModal.hidden) return 'hours';
     if (locationModal && !locationModal.hidden) return 'location';
-    if (phoneModal && !phoneModal.hidden) return 'phone';
     return null;
   }
 
@@ -1709,10 +1705,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (openModalType === 'location') {
       closeLocationModal(event);
-      return true;
-    }
-    if (openModalType === 'phone') {
-      closePhoneModal(event);
       return true;
     }
     return false;
@@ -2058,9 +2050,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const locationModalBackdrop = document.getElementById('locationModalBackdrop');
   const locationModalClose = document.getElementById('locationModalClose');
   const phoneBtn = document.getElementById('phoneBtn');
-  const phoneModal = document.getElementById('phoneModal');
-  const phoneModalBackdrop = document.getElementById('phoneModalBackdrop');
-  const phoneModalClose = document.getElementById('phoneModalClose');
   const foodSectionToggle = document.getElementById('foodSectionToggle');
   const foodSectionLabel = document.getElementById('foodSectionLabel');
   const foodSectionList = document.getElementById('foodSectionList');
@@ -2494,21 +2483,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
   }
 
-  function openPhoneModal(event) {
-    event?.preventDefault?.();
-    if (!phoneModal) return;
-    registerModalOpen();
-    phoneModal.hidden = false;
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closePhoneModal(event) {
-    registerModalDismiss(event);
-    if (!phoneModal) return;
-    phoneModal.hidden = true;
-    document.body.style.overflow = '';
-  }
-
   function openCoffeeInfoModal(message) {
     if (!coffeeInfoModal || !coffeeInfoModalText || !message) return;
     registerModalOpen();
@@ -2729,9 +2703,6 @@ document.addEventListener('DOMContentLoaded', () => {
   attachTapHandler(hoursBtn, openHoursModal);
   attachTapHandler(hoursModalBackdrop, closeHoursModal);
   attachTapHandler(hoursModalClose, closeHoursModal);
-  attachTapHandler(phoneBtn, openPhoneModal);
-  attachTapHandler(phoneModalBackdrop, closePhoneModal);
-  attachTapHandler(phoneModalClose, closePhoneModal);
   attachTapHandler(coffeeInfoModal, closeCoffeeInfoModal);
   attachTapHandler(coffeeInfoModalDialog, closeCoffeeInfoModal);
   attachTapHandler(coffeeInfoModalBackdrop, closeCoffeeInfoModal);
@@ -2807,9 +2778,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (event.key === 'Escape' && locationModal && !locationModal.hidden) {
       closeLocationModal(event);
-    }
-    if (event.key === 'Escape' && phoneModal && !phoneModal.hidden) {
-      closePhoneModal(event);
     }
   });
 
