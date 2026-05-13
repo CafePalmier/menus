@@ -6,11 +6,12 @@
     <title>Palmier</title>
     <!-- Import the Metropolis font and link the stylesheet -->
     <link href="https://fonts.googleapis.com/css2?family=Metropolis:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/ner3ehe.css">
     <link rel="stylesheet" href="style.css?v=20260325a" />
   </head>
   <body>
     <!-- Language toggle -->
-    <div id="langSwitcher" class="language-switcher eng-active" data-lang-switcher>
+    <div id="langSwitcher" class="language-switcher fra-active" data-lang-switcher>
       <div id="langToggle" class="toggle"></div>
       <span class="eng">ENG</span>
       <span class="fra">FRA</span>
@@ -39,6 +40,23 @@
             </div>
           </a>
         </div>
+        <div class="info-row">
+          <button id="hoursBtn" type="button" class="social-btn" aria-label="Hours">
+            <div class="social-content">
+              <img src="Assets/hours.png" alt="Hours" />
+            </div>
+          </button>
+          <button id="locationBtn" type="button" class="social-btn" aria-label="Location">
+            <div class="social-content">
+              <img src="Assets/location.png" alt="Location" />
+            </div>
+          </button>
+          <a id="phoneBtn" href="tel:+18198271777" class="social-btn" aria-label="Phone">
+            <div class="social-content">
+              <img src="Assets/phone.png" alt="Phone" />
+            </div>
+          </a>
+        </div>
 
         <!-- Grid of menu tiles -->
         <div class="tile-grid">
@@ -46,6 +64,12 @@
             <div class="tile-content">
               <img src="Assets/food.png" alt="Food icon" />
               <span class="label" data-key="food">Food</span>
+            </div>
+          </div>
+          <div id="coffeeBtn" class="tile">
+            <div class="tile-content">
+              <img src="Assets/coffee.png" alt="Coffee icon" />
+              <span class="label" data-key="coffee">Coffee</span>
             </div>
           </div>
           <div id="teaBtn" class="tile">
@@ -58,12 +82,6 @@
             <div class="tile-content">
               <img src="Assets/cocktail.png" alt="Cocktails icon" />
               <span class="label" data-key="cocktails">Cocktails</span>
-            </div>
-          </div>
-          <div id="coffeeBtn" class="tile">
-            <div class="tile-content">
-              <img src="Assets/coffee.png" alt="Coffee icon" />
-              <span class="label" data-key="coffee">Coffee</span>
             </div>
           </div>
         </div>
@@ -105,7 +123,7 @@
               <div id="foodSectionList" class="section-dropdown-list" aria-hidden="true"></div>
             </div>
             <div class="food-header-lang">
-              <div id="foodLangSwitcher" class="language-switcher inline-switcher eng-active" data-lang-switcher>
+              <div id="foodLangSwitcher" class="language-switcher inline-switcher fra-active" data-lang-switcher>
                 <div class="toggle"></div>
                 <span class="eng">ENG</span>
                 <span class="fra">FRA</span>
@@ -141,7 +159,7 @@
             <span class="sr-only">Back</span>
           </button>
           <div class="page-header-lang">
-            <div id="teaLangSwitcher" class="language-switcher inline-switcher eng-active" data-lang-switcher>
+            <div id="teaLangSwitcher" class="language-switcher inline-switcher fra-active" data-lang-switcher>
               <div class="toggle"></div>
               <span class="eng">ENG</span>
               <span class="fra">FRA</span>
@@ -153,21 +171,198 @@
 
       <!-- Coffee menu page -->
       <div id="coffeePage" class="menu-page coffee-page" style="display:none;">
-        <div class="page-header">
-          <button id="backCoffee" class="back-button compact">
-            <span class="back-arrow" aria-hidden="true"></span>
-            <span class="sr-only">Back</span>
-          </button>
-          <div class="page-header-lang">
-            <div id="coffeeLangSwitcher" class="language-switcher inline-switcher eng-active" data-lang-switcher>
-              <div class="toggle"></div>
-              <span class="eng">ENG</span>
-              <span class="fra">FRA</span>
+        <div class="page-header coffee-header">
+          <div class="coffee-header-top">
+            <button id="backCoffee" class="back-button compact">
+              <span class="back-arrow" aria-hidden="true"></span>
+              <span class="sr-only">Back</span>
+            </button>
+            <div class="page-header-lang">
+              <div id="coffeeLangSwitcher" class="language-switcher inline-switcher fra-active" data-lang-switcher>
+                <div class="toggle"></div>
+                <span class="eng">ENG</span>
+                <span class="fra">FRA</span>
+              </div>
             </div>
           </div>
+          <img
+            id="coffeeBuildImage"
+            class="coffee-build-image"
+            src="Assets/menus/coffees/placeholder.png"
+            alt="Coffee build preview"
+          />
+          <p id="coffeeBuildCaption" class="coffee-build-caption label" data-key="coffeeBuildStart">Customize your drink below and see how to order it at the cafe</p>
         </div>
-        <div class="menu-image-wrapper">
-          <img id="coffeeImage" class="menu-image" src="Assets/menus/coffee-eng.png" alt="Coffee menu (English)" />
+        <div id="coffeeBuildView" class="coffee-detail-view">
+          <div class="coffee-build-controls">
+            <section class="coffee-build-group coffee-build-base-group" aria-labelledby="coffeeBaseGroupLabel">
+              <h2 id="coffeeBaseGroupLabel" class="coffee-build-group-title label" data-key="coffeeBuildChooseBase">Drink Base</h2>
+              <div class="coffee-build-base-options">
+                <button id="coffeeBaseEspressoBtn" class="coffee-build-base-option" type="button">
+                  <img src="Assets/menus/coffees/buttons/spro.png" alt="" aria-hidden="true" class="coffee-build-base-icon" />
+                  <span class="label" data-key="coffeeBaseEspresso">Espresso</span>
+                </button>
+                <button id="coffeeBaseTeaBtn" class="coffee-build-base-option" type="button">
+                  <img src="Assets/menus/coffees/buttons/tea.png" alt="" aria-hidden="true" class="coffee-build-base-icon" />
+                  <span class="label" data-key="coffeeBaseTea">Tea Latté</span>
+                </button>
+                <button id="coffeeBaseDripBtn" class="coffee-build-base-option" type="button">
+                  <img src="Assets/menus/coffees/buttons/drip.png" alt="" aria-hidden="true" class="coffee-build-base-icon" />
+                  <span class="label" data-key="coffeeBaseDrip">Drip Coffee</span>
+                </button>
+                <button id="coffeeBaseChocolateBtn" class="coffee-build-base-option" type="button">
+                  <img src="Assets/menus/coffees/buttons/choc.png" alt="" aria-hidden="true" class="coffee-build-base-icon" />
+                  <span class="label" data-key="coffeeBaseChocolate">Chocolate</span>
+                </button>
+              </div>
+            </section>
+            <section id="coffeeTeaFlavorGroup" class="coffee-build-group coffee-build-tea-flavor-group" hidden>
+              <div class="coffee-build-tea-flavor-options">
+                <button id="coffeeTeaFlavorChaiBtn" class="coffee-build-tea-flavor-option" type="button">
+                  <span class="coffee-build-tea-flavor-dot coffee-build-tea-flavor-dot-chai" aria-hidden="true"></span>
+                  <span class="label coffee-build-tea-flavor-name" data-key="coffeeTeaFlavorChai">Chai</span>
+                </button>
+                <button id="coffeeTeaFlavorMatchaBtn" class="coffee-build-tea-flavor-option" type="button">
+                  <span class="coffee-build-tea-flavor-dot coffee-build-tea-flavor-dot-matcha" aria-hidden="true"></span>
+                  <span class="label coffee-build-tea-flavor-name" data-key="coffeeTeaFlavorMatcha">Matcha</span>
+                </button>
+                <button id="coffeeTeaFlavorGingerBtn" class="coffee-build-tea-flavor-option" type="button">
+                  <span class="coffee-build-tea-flavor-dot coffee-build-tea-flavor-dot-ginger" aria-hidden="true"></span>
+                  <span class="label coffee-build-tea-flavor-name" data-key="coffeeTeaFlavorGinger">Ginger Turmeric</span>
+                </button>
+                <button id="coffeeTeaFlavorEarlGreyBtn" class="coffee-build-tea-flavor-option" type="button">
+                  <span class="coffee-build-tea-flavor-dot coffee-build-tea-flavor-dot-earl-grey" aria-hidden="true"></span>
+                  <span class="label coffee-build-tea-flavor-name" data-key="coffeeTeaFlavorEarlGrey">Earl Grey (London Fog)</span>
+                </button>
+                <button id="coffeeTeaFlavorSereniteaBtn" class="coffee-build-tea-flavor-option" type="button">
+                  <span class="coffee-build-tea-flavor-dot coffee-build-tea-flavor-dot-serenitea" aria-hidden="true"></span>
+                  <span class="label coffee-build-tea-flavor-name" data-key="coffeeTeaFlavorSerenitea">Serenitea</span>
+                </button>
+              </div>
+            </section>
+            <section id="coffeeBeanGroup" class="coffee-build-group coffee-build-bean-group" aria-labelledby="coffeeBeanGroupLabel" hidden>
+              <h2 id="coffeeBeanGroupLabel" class="coffee-build-group-title label" data-key="coffeeBuildChooseBeans">Espresso Beans</h2>
+              <div class="coffee-build-bean-card-options coffee-build-bean-card-options-three">
+                <button id="coffeeBeanPalmierBtn" class="coffee-build-bean-card" type="button" aria-label="Palmier Beans">
+                  <img src="Assets/menus/coffees/buttons/p.png" alt="" aria-hidden="true" class="coffee-build-bean-card-icon" />
+                  <span class="label coffee-build-bean-name" data-key="coffeeBeanPalmier">Palmier Beans</span>
+                  <span class="label coffee-build-bean-description" data-key="coffeeBeanPalmierDesc">Natural Brazilian, Chocolatty/Nutty notes</span>
+                </button>
+                <button id="coffeeBeanDecafBtn" class="coffee-build-bean-card" type="button" aria-label="Decaf">
+                  <img src="Assets/menus/coffees/buttons/d.png" alt="" aria-hidden="true" class="coffee-build-bean-card-icon" />
+                  <span class="label coffee-build-bean-name" data-key="coffeeBeanDecaf">Decaf</span>
+                  <span class="label coffee-build-bean-description" data-key="coffeeBeanDecafDesc">Anchored coffee</span>
+                </button>
+                <button id="coffeeBeanFeatureBtn" class="coffee-build-bean-card" type="button" aria-label="Feature Espresso">
+                  <img src="Assets/menus/coffees/buttons/f.png" alt="" aria-hidden="true" class="coffee-build-bean-card-icon" />
+                  <span class="label coffee-build-bean-name" data-key="coffeeBeanFeature">Feature Espresso</span>
+                  <span class="label coffee-build-bean-description" data-key="coffeeBeanFeatureDesc">Changes weekly, notes are usually fruity/funky</span>
+                </button>
+              </div>
+            </section>
+            <section id="coffeeDripBeanGroup" class="coffee-build-group coffee-build-bean-group" aria-labelledby="coffeeDripBeanGroupLabel" hidden>
+              <h2 id="coffeeDripBeanGroupLabel" class="coffee-build-group-title label" data-key="coffeeBuildChooseDripBeans">Drip Beans</h2>
+              <div class="coffee-build-bean-card-options">
+                <button id="coffeeDripBeanNightHawkBtn" class="coffee-build-bean-card coffee-build-bean-card-no-icon" type="button" aria-label="Night Hawk">
+                  <span class="label coffee-build-bean-name" data-key="coffeeDripBeanNightHawk">Night Hawk</span>
+                  <span class="label coffee-build-bean-description" data-key="coffeeDripBeanNightHawkDesc">Chocolatty/Nutty best with milk</span>
+                </button>
+                <button id="coffeeDripBeanFeatureBtn" class="coffee-build-bean-card coffee-build-bean-card-no-icon" type="button" aria-label="Feature">
+                  <span class="label coffee-build-bean-name" data-key="coffeeDripBeanFeature">Feature</span>
+                  <span class="label coffee-build-bean-description" data-key="coffeeDripBeanFeatureDesc">Changes daily, usually fruitier, best black</span>
+                </button>
+              </div>
+            </section>
+            <div class="coffee-build-pill-row">
+              <section class="coffee-build-group" aria-labelledby="coffeeCupGroupLabel">
+                <h2 id="coffeeCupGroupLabel" class="coffee-build-group-title label" data-key="coffeeBuildChooseService">Choose service</h2>
+                <div id="coffeeServiceSwitch" class="coffee-build-pill-switch" role="group" aria-labelledby="coffeeCupGroupLabel">
+                  <span class="coffee-build-pill-slider" aria-hidden="true"></span>
+                  <button id="coffeeForHereBtn" class="coffee-build-pill-option label" data-key="coffeeForHere" type="button">For Here</button>
+                  <button id="coffeeToGoBtn" class="coffee-build-pill-option label" data-key="coffeeToGo" type="button">To Go</button>
+                </div>
+              </section>
+              <section class="coffee-build-group" aria-labelledby="coffeeTempGroupLabel">
+                <h2 id="coffeeTempGroupLabel" class="coffee-build-group-title label" data-key="coffeeBuildChooseTemperature">Choose temperature</h2>
+                <div id="coffeeTempSwitch" class="coffee-build-pill-switch" role="group" aria-labelledby="coffeeTempGroupLabel">
+                  <span class="coffee-build-pill-slider" aria-hidden="true"></span>
+                  <button id="coffeeHotBtn" class="coffee-build-pill-option label" data-key="coffeeHot" type="button">Hot</button>
+                  <button id="coffeeIcedBtn" class="coffee-build-pill-option label" data-key="coffeeIced" type="button">Iced</button>
+                </div>
+              </section>
+            </div>
+            <section class="coffee-build-group coffee-build-steamed-group" aria-labelledby="coffeeSteamedGroupLabel">
+              <h2 id="coffeeSteamedGroupLabel" class="coffee-build-group-title label" data-key="coffeeBuildChooseSteamedMilk">Steamed milk</h2>
+              <div id="coffeeSteamedMilkSwitch" class="coffee-build-pill-switch" role="group" aria-labelledby="coffeeSteamedGroupLabel">
+                <span class="coffee-build-pill-slider" aria-hidden="true"></span>
+                <button id="coffeeSteamedMilkNoBtn" class="coffee-build-pill-option label" data-key="coffeeNo" type="button">No</button>
+                <button id="coffeeSteamedMilkYesBtn" class="coffee-build-pill-option label" data-key="coffeeYes" type="button">Yes</button>
+              </div>
+            </section>
+            <section id="coffeeEspressoOnlyControls" class="coffee-build-group coffee-build-slider-group" aria-labelledby="coffeeMilkGroupLabel" hidden>
+              <div id="coffeeMilkSliderBlock" class="coffee-build-slider-block">
+                <div class="coffee-build-slider-header">
+                  <h2 id="coffeeMilkGroupLabel" class="coffee-build-group-title label" data-key="coffeeBuildChooseMilkQty">Milk (oz)</h2>
+                  <span id="coffeeMilkValue" class="coffee-build-slider-value">0</span>
+                </div>
+                <input id="coffeeMilkSlider" class="coffee-build-slider-input" type="range" min="0" max="7" step="1" value="0" />
+                <div id="coffeeMilkSliderSteps" class="coffee-build-slider-steps">
+                  <span>0</span>
+                  <span>.5</span>
+                  <span>3</span>
+                  <span>3.5</span>
+                  <span>5.25</span>
+                  <span>6</span>
+                  <span>8</span>
+                  <span>10</span>
+                </div>
+              </div>
+              <div id="coffeeWaterSliderBlock" class="coffee-build-slider-block">
+                <div class="coffee-build-slider-header">
+                  <h2 id="coffeeWaterGroupLabel" class="coffee-build-group-title label" data-key="coffeeBuildChooseWaterQty">Hot Water (oz)</h2>
+                  <span id="coffeeWaterValue" class="coffee-build-slider-value">0</span>
+                </div>
+                <input id="coffeeWaterSlider" class="coffee-build-slider-input" type="range" min="0" max="4" step="1" value="0" />
+                <div class="coffee-build-slider-steps coffee-build-slider-steps-short">
+                  <span>0</span>
+                  <span>3</span>
+                  <span>6</span>
+                  <span>8</span>
+                  <span>10</span>
+                </div>
+              </div>
+              <div id="coffeeFoamSliderBlock" class="coffee-build-slider-block" hidden>
+                <div class="coffee-build-slider-header">
+                  <h2 id="coffeeFoamGroupLabel" class="coffee-build-group-title label" data-key="coffeeBuildChooseFoamTexture">Foam Texture</h2>
+                  <span id="coffeeFoamValue" class="coffee-build-slider-value">Thin</span>
+                </div>
+                <input id="coffeeFoamSlider" class="coffee-build-slider-input" type="range" min="0" max="2" step="1" value="0" />
+                <div class="coffee-build-slider-steps coffee-build-slider-steps-triplet coffee-build-slider-steps-foam">
+                  <span class="label" data-key="coffeeFoamThin">Thin</span>
+                  <span class="label" data-key="coffeeFoamMedium">Medium</span>
+                  <span class="label" data-key="coffeeFoamThick">Thick</span>
+                </div>
+              </div>
+            </section>
+            <section id="coffeeMilkTypeGroup" class="coffee-build-group coffee-build-milk-type-group" aria-labelledby="coffeeMilkTypeGroupLabel" hidden>
+              <h2 id="coffeeMilkTypeGroupLabel" class="coffee-build-group-title label" data-key="coffeeBuildChooseMilkType">Milk Type</h2>
+              <div class="coffee-build-milk-type-options">
+                <button id="coffeeMilkTypeHenriettaBtn" class="coffee-build-milk-type-option label" data-key="coffeeMilkTypeHenrietta" type="button">Henrietta 3.8%</button>
+                <button id="coffeeMilkTypeSoyBtn" class="coffee-build-milk-type-option coffee-build-milk-type-option-vegan label" data-key="coffeeMilkTypeSoy" type="button">Soy</button>
+                <button id="coffeeMilkTypeOatBtn" class="coffee-build-milk-type-option coffee-build-milk-type-option-vegan label" data-key="coffeeMilkTypeOat" type="button">Oat</button>
+                <button id="coffeeMilkTypeMacadamiaBtn" class="coffee-build-milk-type-option coffee-build-milk-type-option-vegan label" data-key="coffeeMilkTypeMacadamia" type="button">Macadamia</button>
+                <button id="coffeeMilkTypeSkimBtn" class="coffee-build-milk-type-option label" data-key="coffeeMilkTypeSkim" type="button">Skim</button>
+                <button id="coffeeMilkTypeLactoseFreeBtn" class="coffee-build-milk-type-option label" data-key="coffeeMilkTypeLactoseFree" type="button">Lactose Free</button>
+              </div>
+            </section>
+            <section id="coffeeFlavorGroup" class="coffee-build-group coffee-build-milk-type-group coffee-build-flavor-group" aria-labelledby="coffeeFlavorGroupLabel" hidden>
+              <h2 id="coffeeFlavorGroupLabel" class="coffee-build-group-title label" data-key="coffeeBuildChooseFlavours">Flavours</h2>
+              <div class="coffee-build-milk-type-options coffee-build-flavor-options">
+                <button id="coffeeFlavorVanillaBtn" class="coffee-build-milk-type-option label" data-key="coffeeFlavorVanilla" type="button">Vanilla</button>
+                <button id="coffeeFlavorMapleBtn" class="coffee-build-milk-type-option label" data-key="coffeeFlavorMaple" type="button">Maple</button>
+              </div>
+            </section>
+          </div>
         </div>
       </div><!-- end of coffeePage -->
 
@@ -190,7 +385,7 @@
             <span class="sr-only">Back</span>
           </button>
           <div class="page-header-lang">
-            <div id="shelfLangSwitcher" class="language-switcher inline-switcher eng-active" data-lang-switcher>
+            <div id="shelfLangSwitcher" class="language-switcher inline-switcher fra-active" data-lang-switcher>
               <div class="toggle"></div>
               <span class="eng">ENG</span>
               <span class="fra">FRA</span>
@@ -261,6 +456,96 @@
         </div>
       </div><!-- end of shelfPage -->
     </div><!-- end of container -->
+
+    <div id="locationModal" class="site-modal" hidden>
+      <div id="locationModalBackdrop" class="site-modal-backdrop"></div>
+      <div class="site-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="locationModalAddress">
+        <button id="locationModalClose" type="button" class="site-modal-close" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <img src="Assets/building.png" alt="" aria-hidden="true" class="site-modal-building-icon" />
+        <p id="locationModalAddress" class="site-modal-address">
+          <span class="label" data-key="locationAddressLine1">40 Chem. Scott,</span><br>
+          <span class="label" data-key="locationAddressLine2">Chelsea, QC J9B 1R5</span>
+        </p>
+        <div class="site-modal-actions">
+          <a
+            class="site-modal-action"
+            href="https://maps.app.goo.gl/GExpTMSwZrrzvZtr5"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="Assets/g-maps.png" alt="" aria-hidden="true" />
+            <span>
+              <span class="label" data-key="openIn">Open In</span><br>
+              <span class="label" data-key="googleMaps">Google Maps</span>
+            </span>
+          </a>
+          <a
+            class="site-modal-action"
+            href="https://maps.apple.com/place?place-id=IA6E352C87F47C9C&address=40+Chemin+Scott%2C+Chelsea+QC+J9B+1R5%2C+Canada&coordinate=45.506516%2C-75.811431&name=Palmier&_provider=9902"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="Assets/a-maps.png" alt="" aria-hidden="true" />
+            <span>
+              <span class="label" data-key="openIn">Open In</span><br>
+              <span class="label" data-key="appleMaps">Apple Maps</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div id="hoursModal" class="site-modal" hidden>
+      <div id="hoursModalBackdrop" class="site-modal-backdrop"></div>
+      <div class="site-modal-dialog site-modal-dialog-hours" role="dialog" aria-modal="true" aria-labelledby="hoursModalTitle">
+        <button id="hoursModalClose" type="button" class="site-modal-close" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <p id="hoursModalTitle" class="site-modal-address label" data-key="hoursTitle">Hours</p>
+        <div class="site-modal-hours" aria-label="Opening hours">
+          <div class="site-modal-hours-row"><span class="label" data-key="monday">Monday</span><span>7-5</span></div>
+          <div class="site-modal-hours-row"><span class="label" data-key="tuesday">Tuesday</span><span>7-5</span></div>
+          <div class="site-modal-hours-row"><span class="label" data-key="wednesday">Wednesday</span><span>7-5</span></div>
+          <div class="site-modal-hours-row"><span class="label" data-key="thursday">Thursday</span><span>7-5</span></div>
+          <div class="site-modal-hours-row"><span class="label" data-key="friday">Friday</span><span>7-5</span></div>
+          <div class="site-modal-hours-row site-modal-hours-row-weekend"><span class="label" data-key="saturday">Saturday</span><span>8-5</span></div>
+          <div class="site-modal-hours-row site-modal-hours-row-weekend"><span class="label" data-key="sunday">Sunday</span><span>8-5</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="phoneModal" class="site-modal" hidden>
+      <div id="phoneModalBackdrop" class="site-modal-backdrop"></div>
+      <div class="site-modal-dialog site-modal-dialog-info" role="dialog" aria-modal="true" aria-labelledby="phoneModalText">
+        <button id="phoneModalClose" type="button" class="site-modal-close" aria-label="Close">
+          <span aria-hidden="true">x</span>
+        </button>
+        <p id="phoneModalText" class="site-modal-info-text label" data-key="phonePrompt">Would you like to call (819) 827-1777?</p>
+        <div class="site-modal-actions">
+          <a
+            id="phoneModalCall"
+            class="site-modal-action"
+            href="tel:+18198271777"
+            aria-label="Call (819) 827-1777"
+          >
+            <img src="Assets/phone.png" alt="" aria-hidden="true" />
+            <span class="label" data-key="phoneCallAction">Call</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div id="coffeeInfoModal" class="site-modal" hidden>
+      <div id="coffeeInfoModalBackdrop" class="site-modal-backdrop"></div>
+      <div class="site-modal-dialog site-modal-dialog-info" role="dialog" aria-modal="true" aria-labelledby="coffeeInfoModalText">
+        <button id="coffeeInfoModalClose" type="button" class="site-modal-close" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <p id="coffeeInfoModalText" class="site-modal-info-text"></p>
+      </div>
+    </div>
 
     <!-- JavaScript -->
     <script src="script.js?v=20260325a"></script>
