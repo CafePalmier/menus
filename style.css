@@ -1405,19 +1405,27 @@ html { overflow-x: hidden; }
 }
 .coffee-build-bean-name {
   display: block;
+  width: 100%;
+  min-width: 0;
   color: var(--color-green);
   font-family: "ruddy", sans-serif;
   font-size: 0.88rem;
   font-weight: 700;
   line-height: 1.15;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 .coffee-build-bean-description {
   display: block;
+  width: 100%;
+  min-width: 0;
   color: var(--color-brown);
   font-family: "ruddy", sans-serif;
   font-size: 0.68rem;
   font-weight: 700;
   line-height: 1.18;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 .coffee-build-bean-dot-night-hawk {
   background: #2f2b28;
@@ -1982,6 +1990,29 @@ html { overflow-x: hidden; }
 
   .coffee-build-bean-description {
     font-size: 0.72rem;
+  }
+
+  .coffee-build-bean-card-options-three {
+    gap: 0.52rem;
+  }
+
+  .coffee-build-bean-card {
+    min-height: 132px;
+    padding: 0.72rem 0.48rem 0.68rem;
+  }
+
+  .coffee-build-bean-card-icon {
+    width: 54px;
+    height: 54px;
+  }
+
+  .coffee-build-bean-name {
+    font-size: 0.74rem;
+    line-height: 1.08;
+  }
+
+  .coffee-build-bean-card.is-active::after {
+    font-size: 0.74rem;
   }
 }
 .cocktails-page .menu-image {
