@@ -2040,6 +2040,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const hoursModal = document.getElementById('hoursModal');
   const hoursModalBackdrop = document.getElementById('hoursModalBackdrop');
   const hoursModalClose = document.getElementById('hoursModalClose');
+  const hoursModalDialog = hoursModal?.querySelector('.site-modal-dialog');
   const coffeeInfoModal = document.getElementById('coffeeInfoModal');
   const coffeeInfoModalBackdrop = document.getElementById('coffeeInfoModalBackdrop');
   const coffeeInfoModalClose = document.getElementById('coffeeInfoModalClose');
@@ -2049,6 +2050,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const locationModal = document.getElementById('locationModal');
   const locationModalBackdrop = document.getElementById('locationModalBackdrop');
   const locationModalClose = document.getElementById('locationModalClose');
+  const locationModalDialog = locationModal?.querySelector('.site-modal-dialog');
   const phoneBtn = document.getElementById('phoneBtn');
   const foodSectionToggle = document.getElementById('foodSectionToggle');
   const foodSectionLabel = document.getElementById('foodSectionLabel');
@@ -2512,17 +2514,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  document.addEventListener('pointerdown', (event) => {
-    if (!dismissOpenModal(event)) return;
-  }, true);
-
-  document.addEventListener('touchstart', (event) => {
-    if (!dismissOpenModal(event)) return;
-  }, { capture: true, passive: false });
-
-  document.addEventListener('click', (event) => {
-    if (!dismissOpenModal(event)) return;
-  }, true);
+  function stopModalTapPropagation(event) {
+    event?.stopPropagation?.();
+  }
 
   function handlePopState(event) {
     const nextPage = event.state?.page || 'home';
@@ -2701,15 +2695,25 @@ document.addEventListener('DOMContentLoaded', () => {
   attachTapHandler(shelfBtn, (event) => navigateToPage('shelf', event));
   attachTapHandler(backShelfBtn, navigateHome);
   attachTapHandler(hoursBtn, openHoursModal);
+  attachTapHandler(hoursModal, closeHoursModal);
   attachTapHandler(hoursModalBackdrop, closeHoursModal);
   attachTapHandler(hoursModalClose, closeHoursModal);
+  if (hoursModalDialog) {
+    hoursModalDialog.addEventListener('click', stopModalTapPropagation);
+    hoursModalDialog.addEventListener('touchstart', stopModalTapPropagation, { passive: true });
+  }
   attachTapHandler(coffeeInfoModal, closeCoffeeInfoModal);
   attachTapHandler(coffeeInfoModalDialog, closeCoffeeInfoModal);
   attachTapHandler(coffeeInfoModalBackdrop, closeCoffeeInfoModal);
   attachTapHandler(coffeeInfoModalClose, closeCoffeeInfoModal);
   attachTapHandler(locationBtn, openLocationModal);
+  attachTapHandler(locationModal, closeLocationModal);
   attachTapHandler(locationModalBackdrop, closeLocationModal);
   attachTapHandler(locationModalClose, closeLocationModal);
+  if (locationModalDialog) {
+    locationModalDialog.addEventListener('click', stopModalTapPropagation);
+    locationModalDialog.addEventListener('touchstart', stopModalTapPropagation, { passive: true });
+  }
 
   [
     coffeeBaseEspressoBtn,
