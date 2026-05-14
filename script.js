@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     coffeeBuildChooseTemperature: { en: 'Temperature', fr: 'Température' },
     coffeeBuildChooseMilkType: { en: 'Milk Type', fr: 'Type de lait' },
     coffeeBuildChooseFlavours: { en: 'Flavours', fr: 'Saveurs' },
+    coffeeBuildChooseShots: { en: 'Shots', fr: 'Shots' },
     coffeeBuildChooseSteamedMilk: { en: 'Steamed milk', fr: 'Lait vapeur' },
     coffeeBuildChooseMilkQty: { en: 'Milk (oz)', fr: 'Lait (oz)' },
     coffeeBuildChooseWaterQty: { en: 'Hot Water (oz)', fr: 'Eau chaude (oz)' },
@@ -57,6 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
     coffeeMilkTypeLactoseFree: { en: 'Lactose Free', fr: 'Sans lactose' },
     coffeeFlavorVanilla: { en: 'Vanilla', fr: 'Vanille' },
     coffeeFlavorMaple: { en: 'Maple', fr: 'Érable' },
+    coffeeShotSingle: { en: 'Single Shot', fr: 'Simple shot' },
+    coffeeShotExtra: { en: 'Extra Shot', fr: 'Extra shot' },
     coffeeFoamThin: { en: 'Thin (flat white foam)', fr: 'Fine (mousse flat white)' },
     coffeeFoamMedium: { en: 'Medium (latté foam)', fr: 'Moyenne (mousse latté)' },
     coffeeFoamThick: { en: 'Thick (cappuccino foam)', fr: 'Épaisse (mousse cappuccino)' },
@@ -548,6 +551,16 @@ document.addEventListener('DOMContentLoaded', () => {
     return '';
   }
 
+  function getCoffeeShotLeadModifier(selectedBases = []) {
+    if (!selectedBases.includes('espresso') || coffeeBuildState.shot !== 'single') return '';
+    return currentLang === 'fr' ? 'simple shot' : 'single shot';
+  }
+
+  function getCoffeeShotCaptionSuffix(selectedBases = []) {
+    if (!selectedBases.includes('espresso') || coffeeBuildState.shot !== 'extra') return '';
+    return currentLang === 'fr' ? ' avec un shot supplémentaire' : ' with an extra shot';
+  }
+
   function getDripBeanCaptionSuffix(selectedBases = [], path = '') {
     if (!(selectedBases.length === 1 && selectedBases[0] === 'drip')) return '';
     if (!/\/filter\.png$/.test(path)) return '';
@@ -613,6 +626,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const isTeaDrink = selectedBases.includes('tea') && /\/(?:chai|matcha|ging|london|serenitea|dirty)\.png$/.test(path);
     const flavor = coffeeBuildState.flavor;
     const milkType = getSelectedMilkTypeCaption();
+    const shotLead = getCoffeeShotLeadModifier(selectedBases);
     const beanLead = getCoffeeBeanLeadModifier(selectedBases);
     const withUnsweetened = isTeaDrink && !flavor;
 
@@ -620,6 +634,9 @@ document.addEventListener('DOMContentLoaded', () => {
       let baseText = stem;
       if (/^Glacé /i.test(baseText)) {
         baseText = `${baseText.slice(6)} glacé`;
+      }
+      if (shotLead) {
+        baseText = `${shotLead} ${baseText}`;
       }
       if (beanLead) {
         baseText += ` ${beanLead}`;
@@ -640,6 +657,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const prefix = prefixMatch ? prefixMatch[0] : '';
     const remainder = prefix ? stem.slice(prefix.length) : stem;
     const leadParts = [];
+    if (shotLead) {
+      leadParts.push(shotLead);
+    }
     if (beanLead) {
       leadParts.push(beanLead);
     }
@@ -685,7 +705,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const imageCaption = COFFEE_BUILD_IMAGE_CAPTIONS[imagePath];
     if (imageCaption) {
       const baseCaption = imageCaption[currentLang] || imageCaption.en;
-      const extraSuffix = `${getDripBeanCaptionSuffix(selectedBases, imagePath)}${getCoffeeBeanCaptionSuffix(imagePath, selectedBases)}${getCoffeeFoamCaptionSuffix(imagePath)}`;
+      const extraSuffix = `${getDripBeanCaptionSuffix(selectedBases, imagePath)}${getCoffeeBeanCaptionSuffix(imagePath, selectedBases)}${getCoffeeFoamCaptionSuffix(imagePath)}${getCoffeeShotCaptionSuffix(selectedBases)}`;
       setCoffeeBuildCaptionText(formatCoffeeCaption(baseCaption, selectedBases, imagePath, extraSuffix));
       return;
     }
@@ -737,6 +757,8 @@ document.addEventListener('DOMContentLoaded', () => {
       modifiers.push(getCoffeeBuildLabel('coffeeIced'));
     }
     const beanSuffix = getCoffeeBeanCaptionSuffix(imagePath, selectedBases);
+    const shotLead = getCoffeeShotLeadModifier(selectedBases);
+    const shotSuffix = getCoffeeShotCaptionSuffix(selectedBases);
     if (isEspressoOnlySelection(selectedBases)) {
       const beanLead = getCoffeeBeanLeadModifier(selectedBases);
       const serviceText = service === 'togo'
@@ -747,17 +769,17 @@ document.addEventListener('DOMContentLoaded', () => {
         ? (currentLang === 'fr' ? ' glacé' : 'Iced ')
         : '';
       if (currentLang === 'fr') {
-        setCoffeeBuildCaptionText(`${beanLead ? `${beanLead} ` : ''}${baseLabel}${temperatureText}${serviceText}${beanSuffix}`);
+        setCoffeeBuildCaptionText(`${shotLead ? `${shotLead} ` : ''}${beanLead ? `${beanLead} ` : ''}${baseLabel}${temperatureText}${serviceText}${beanSuffix}${shotSuffix}`);
       } else {
         const englishServiceText = service === 'togo'
           ? ' to go'
         : '';
         const englishTempText = temperature === 'iced' ? 'Iced ' : '';
-        setCoffeeBuildCaptionText(`${englishTempText}${beanLead ? `${beanLead} ` : ''}${baseLabel}${englishServiceText}${beanSuffix}`);
+        setCoffeeBuildCaptionText(`${shotLead ? `${shotLead} ` : ''}${englishTempText}${beanLead ? `${beanLead} ` : ''}${baseLabel}${englishServiceText}${beanSuffix}${shotSuffix}`);
       }
       return;
     }
-    setCoffeeBuildCaptionText(`${modifiers.length ? `${baseLabel} • ${modifiers.join(' • ')}` : baseLabel}${beanSuffix}`);
+    setCoffeeBuildCaptionText(`${modifiers.length ? `${baseLabel} • ${modifiers.join(' • ')}` : baseLabel}${beanSuffix}${shotSuffix}`);
   }
 
   function setCoffeeBuildOptionState(button, active, disabled = false) {
@@ -1293,6 +1315,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (coffeeFlavorGroup) {
       coffeeFlavorGroup.hidden = !selectedBases.length;
     }
+    const showShotGroup = espressoSelected && (
+      !espressoOnly ||
+      coffeeBuildState.milkIndex > 0 ||
+      coffeeBuildState.waterIndex > 0
+    );
+    if (!showShotGroup) {
+      coffeeBuildState.shot = null;
+    }
+    if (coffeeShotGroup) {
+      coffeeShotGroup.hidden = !showShotGroup;
+    }
     const featureBeanSelected = espressoOnly && coffeeBuildState.bean === 'feature';
     const palmierBeanSelected = coffeeBuildState.bean === 'palmier';
     const decafBeanSelected = coffeeBuildState.bean === 'decaf';
@@ -1339,6 +1372,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setCoffeeBuildOptionState(coffeeMilkTypeLactoseFreeBtn, coffeeBuildState.milkType === 'lactose-free');
     setCoffeeBuildOptionState(coffeeFlavorVanillaBtn, coffeeBuildState.flavor === 'vanilla');
     setCoffeeBuildOptionState(coffeeFlavorMapleBtn, coffeeBuildState.flavor === 'maple');
+    setCoffeeBuildOptionState(coffeeShotSingleBtn, coffeeBuildState.shot === 'single');
+    setCoffeeBuildOptionState(coffeeShotExtraBtn, coffeeBuildState.shot === 'extra');
     setCoffeeBuildOptionState(coffeeForHereBtn, coffeeBuildState.service === 'stay');
     setCoffeeBuildOptionState(coffeeToGoBtn, coffeeBuildState.service === 'togo');
     setCoffeeBuildPillSwitchState(coffeeServiceSwitch, coffeeBuildState.service === 'togo' ? 1 : 0);
@@ -1557,6 +1592,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (type === 'flavor') {
       coffeeBuildState.flavor = coffeeBuildState.flavor === value ? null : value;
       coffeeBuildState.flavorCustomized = true;
+    }
+    if (type === 'shot') {
+      coffeeBuildState.shot = coffeeBuildState.shot === value ? null : value;
     }
     if (type === 'teaFlavor') {
       coffeeBuildState.teaFlavor = coffeeBuildState.teaFlavor === value ? null : value;
@@ -2010,6 +2048,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const coffeeFlavorGroup = document.getElementById('coffeeFlavorGroup');
   const coffeeFlavorVanillaBtn = document.getElementById('coffeeFlavorVanillaBtn');
   const coffeeFlavorMapleBtn = document.getElementById('coffeeFlavorMapleBtn');
+  const coffeeShotGroup = document.getElementById('coffeeShotGroup');
+  const coffeeShotSingleBtn = document.getElementById('coffeeShotSingleBtn');
+  const coffeeShotExtraBtn = document.getElementById('coffeeShotExtraBtn');
   const coffeeSteamedMilkSwitch = document.getElementById('coffeeSteamedMilkSwitch');
   const coffeeForHereBtn = document.getElementById('coffeeForHereBtn');
   const coffeeToGoBtn = document.getElementById('coffeeToGoBtn');
@@ -2071,6 +2112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     milkType: null,
     flavor: null,
     flavorCustomized: false,
+    shot: null,
     service: 'stay',
     temperature: 'hot',
     steamedMilk: false,
@@ -2645,6 +2687,14 @@ document.addEventListener('DOMContentLoaded', () => {
   attachTapHandler(coffeeFlavorMapleBtn, (event) => {
     event?.preventDefault?.();
     setCoffeeBuildChoice('flavor', 'maple');
+  });
+  attachTapHandler(coffeeShotSingleBtn, (event) => {
+    event?.preventDefault?.();
+    setCoffeeBuildChoice('shot', 'single');
+  });
+  attachTapHandler(coffeeShotExtraBtn, (event) => {
+    event?.preventDefault?.();
+    setCoffeeBuildChoice('shot', 'extra');
   });
   attachTapHandler(coffeeForHereBtn, (event) => {
     event?.preventDefault?.();
