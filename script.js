@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateLabels() {
     document.querySelectorAll('.label').forEach(el => {
+      if (el.id === 'coffeeBuildCaption') return;
       const key = el.getAttribute('data-key');
       if (translations[key]) {
         el.textContent = translations[key][currentLang];
@@ -1685,10 +1686,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateFoodSectionLabel();
     updateFoodSectionFromScroll();
     updateCoffeeBuildPreview();
-    const selectedBases = Array.isArray(coffeeBuildState.base) ? coffeeBuildState.base : [];
-    if (!selectedBases.length && !coffeeBuildState.steamedMilk) {
-      setCoffeeBuildCaptionText(getCoffeeBuildLabel('coffeeBuildStart'));
-    }
   }
 
   function toggleLanguage() {
