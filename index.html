@@ -7,7 +7,7 @@
     <!-- Import the Metropolis font and link the stylesheet -->
     <link href="https://fonts.googleapis.com/css2?family=Metropolis:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.typekit.net/ner3ehe.css">
-    <link rel="stylesheet" href="style.css?v=20260325a" />
+    <link rel="stylesheet" href="style.css?v=20260524o" />
   </head>
   <body>
     <!-- Language toggle -->
@@ -120,7 +120,6 @@
                 <span id="foodSectionLabel">Toast</span>
                 <span class="chevron" aria-hidden="true"></span>
               </button>
-              <div id="foodSectionList" class="section-dropdown-list" aria-hidden="true"></div>
             </div>
             <div class="food-header-lang">
               <div id="foodLangSwitcher" class="language-switcher inline-switcher fra-active" data-lang-switcher>
@@ -146,8 +145,7 @@
           </div>
         </div>
         <div class="food-content">
-          <div id="foodMenuEn" class="food-menu menu-text"></div>
-          <div id="foodMenuFr" class="food-menu menu-text" hidden></div>
+          <div id="foodMenu" class="food-menu menu-text"></div>
         </div>
       </div><!-- end of foodPage -->
 
@@ -504,6 +502,10 @@
       </div>
     </div>
 
+    <div id="foodSectionDropdownLayer" class="section-dropdown-layer" aria-hidden="true">
+      <div id="foodSectionList" class="section-dropdown-list" aria-hidden="true"></div>
+    </div>
+
     <div id="hoursModal" class="site-modal" hidden>
       <div id="hoursModalBackdrop" class="site-modal-backdrop"></div>
       <div class="site-modal-dialog site-modal-dialog-hours" role="dialog" aria-modal="true" aria-labelledby="hoursModalTitle">
@@ -534,6 +536,6 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="script.js?v=20260325a"></script>
+    <script src="script.js?v=20260524r"></script>
   </body>
 </html>

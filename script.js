@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     full: {
       sections: [
         { key: 'toast',        labels: { en: 'Toast',               fr: 'Toast' } },
-        { key: 'french_toast', labels: { en: 'French Toast…', fr: 'Pain doré…' } },
+        { key: 'french_toast', labels: { en: 'French Toast & Pancakes', fr: 'Pain doré & Pancakes' } },
         { key: 'bowls',        labels: { en: 'Bowls',               fr: 'Bols' } },
         { key: 'soup',         labels: { en: 'Seasonal Soup',       fr: 'Soupe de saison' } },
         { key: 'sandwich',     labels: { en: 'Sandwich',            fr: 'Sandwich' } },
@@ -387,15 +387,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function updateFoodSectionDropdownPosition() {
+    if (!foodSectionToggle || !foodSectionList) return;
+    const rect = foodSectionToggle.getBoundingClientRect();
+    const viewportPadding = 12;
+    const dropdownGap = 8;
+    const availableBelow = window.innerHeight - rect.bottom - viewportPadding;
+    const availableAbove = rect.top - viewportPadding;
+    const shouldOpenUpward = availableBelow < 220 && availableAbove > availableBelow;
+    const maxHeight = Math.max(140, Math.floor((shouldOpenUpward ? availableAbove : availableBelow) - dropdownGap));
+    const top = shouldOpenUpward
+      ? Math.max(viewportPadding, rect.top - maxHeight - dropdownGap)
+      : rect.bottom + dropdownGap;
+
+    foodSectionList.style.left = `${rect.left}px`;
+    foodSectionList.style.top = `${top}px`;
+    foodSectionList.style.width = `${rect.width}px`;
+    foodSectionList.style.maxHeight = `${maxHeight}px`;
+    foodSectionList.classList.toggle('open-upward', shouldOpenUpward);
+  }
+
   function setFoodSectionDropdown(open) {
     const dropdown = foodSectionToggle?.closest('.section-dropdown');
     if (open) {
       foodSectionDropdownOpen = true;
+      if (foodSectionList && !foodSectionList.children.length) {
+        renderFoodSectionList();
+      }
+      updateFoodSectionDropdownPosition();
+      if (foodSectionDropdownLayer) {
+        foodSectionDropdownLayer.setAttribute('aria-hidden', 'false');
+        foodSectionDropdownLayer.classList.add('is-open');
+      }
       if (foodSectionToggle) {
         foodSectionToggle.setAttribute('aria-expanded', 'true');
       }
       if (foodSectionList) {
         foodSectionList.setAttribute('aria-hidden', 'false');
+        foodSectionList.classList.remove('is-closing');
+        foodSectionList.classList.add('is-open');
         foodSectionList.querySelectorAll('button').forEach(btn => {
           btn.tabIndex = 0;
         });
@@ -426,6 +456,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (dropdown.classList.contains('open')) {
       requestAnimationFrame(() => dropdown.classList.remove('open'));
     }
+    if (foodSectionList) {
+      foodSectionList.classList.remove('is-open');
+      foodSectionList.classList.add('is-closing');
+    }
     window.setTimeout(finalizeDropdownClose, 200);
   }
 
@@ -437,6 +471,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (foodSectionList) {
       foodSectionList.setAttribute('aria-hidden', 'true');
+      foodSectionList.classList.remove('is-open');
+      foodSectionList.classList.remove('is-closing');
+      foodSectionList.classList.remove('open-upward');
+      foodSectionList.style.left = '';
+      foodSectionList.style.top = '';
+      foodSectionList.style.width = '';
+      foodSectionList.style.maxHeight = '';
+    }
+    if (foodSectionDropdownLayer) {
+      foodSectionDropdownLayer.setAttribute('aria-hidden', 'true');
+      foodSectionDropdownLayer.classList.remove('is-open');
     }
   }
 
@@ -2092,6 +2137,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const phoneBtn = document.getElementById('phoneBtn');
   const foodSectionToggle = document.getElementById('foodSectionToggle');
   const foodSectionLabel = document.getElementById('foodSectionLabel');
+  const foodSectionDropdownLayer = document.getElementById('foodSectionDropdownLayer');
   const foodSectionList = document.getElementById('foodSectionList');
   const foodHeader = document.querySelector('#foodPage .food-header');
   let menuIcons = [];
@@ -2784,7 +2830,15 @@ document.addEventListener('DOMContentLoaded', () => {
   if (foodSectionToggle) {
     foodSectionToggle.addEventListener('click', (event) => {
       event.preventDefault();
+      event.stopPropagation();
       toggleFoodSectionDropdown();
+    });
+  }
+
+  if (foodSectionDropdownLayer) {
+    foodSectionDropdownLayer.addEventListener('click', (event) => {
+      if (foodSectionList?.contains(event.target)) return;
+      setFoodSectionDropdown(false);
     });
   }
 
@@ -2797,11 +2851,13 @@ document.addEventListener('DOMContentLoaded', () => {
     setFoodSectionDropdown(false);
   });
 
+  window.addEventListener('resize', () => {
+    if (!foodSectionDropdownOpen) return;
+    updateFoodSectionDropdownPosition();
+  });
+
   if (foodPage) {
     foodPage.addEventListener('scroll', () => {
-      if (foodSectionDropdownOpen) {
-        setFoodSectionDropdown(false);
-      }
       updateFoodSectionFromScroll();
     });
   }
