@@ -2015,8 +2015,12 @@ html { overflow-x: hidden; }
     font-size: 0.74rem;
   }
 }
+.cocktails-page {
+  display: flex;
+  flex-direction: column;
+}
 .cocktails-page .menu-image {
-  margin: -3.5rem auto 1.2rem;
+  margin: auto auto calc(1rem + env(safe-area-inset-bottom, 0px));
 }
 .shelf-page {
   padding: 0 0 2rem;
