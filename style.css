@@ -617,8 +617,15 @@ html { overflow-x: hidden; }
 .food-header .section-dropdown {
   position: relative;
   flex: 1;
+  min-width: 0;
   max-width: 220px;
   margin: 0 auto;
+  z-index: 1;
+}
+.food-header .food-header-lang {
+  position: relative;
+  z-index: 20;
+  flex-shrink: 0;
 }
 .food-header .section-dropdown-toggle {
   width: 100%;
@@ -659,7 +666,7 @@ html { overflow-x: hidden; }
 .section-dropdown-layer {
   position: fixed;
   inset: 0;
-  z-index: 9999;
+  z-index: 11;
   visibility: hidden;
   pointer-events: none;
 }

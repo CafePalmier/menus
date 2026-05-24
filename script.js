@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         en: `
       <section id="food-toast-en" class="menu-section image-card" data-section-key="toast">
         <h2 class="sr-only">Toast</h2>
-        <img src="Assets/menus/food/eng/toasts-eng.png" alt="Toasts menu" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/eng/toasts.png" alt="Toasts menu" class="food-menu-image" loading="lazy" />
         <img src="Assets/menus/food/icons/gravlax.png" alt="" aria-hidden="true" class="menu-icon icon-gravlax" />
       </section>
 
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       <section id="food-soup-en" class="menu-section image-card" data-section-key="soup">
         <h2 class="sr-only">Seasonal Soup</h2>
-        <img src="Assets/menus/food/eng/soup-eng.png" alt="Seasonal soup menu" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/eng/soup.png" alt="Seasonal soup menu" class="food-menu-image" loading="lazy" />
         <img src="Assets/menus/food/icons/breakfastsandwich.png" alt="" aria-hidden="true" class="menu-icon icon-breakfast-left" />
       </section>
 
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       <section id="food-alacarte-en" class="menu-section image-card" data-section-key="a_la_carte">
         <h2 class="sr-only">À la carte</h2>
-        <img src="Assets/menus/food/eng/a-la-carte-eng.png" alt="À la carte menu" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/eng/a-la-carte.png" alt="À la carte menu" class="food-menu-image" loading="lazy" />
         <img src="Assets/menus/food/eng/add.png" alt="Add-ons menu" class="food-menu-image stacked" loading="lazy" />
       </section>
     `,
@@ -322,8 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const teaImage = document.getElementById('teaImage');
-  const foodMenuEn = document.getElementById('foodMenuEn');
-  const foodMenuFr = document.getElementById('foodMenuFr');
+  const foodMenu = document.getElementById('foodMenu');
   const legendGfPill = document.getElementById('legendGfPill');
   const legendGfText = document.getElementById('legendGfText');
   const legendVegetarianText = document.getElementById('legendVegetarianText');
@@ -490,8 +489,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function getActiveFoodSectionElement(key) {
-    const container = currentLang === 'en' ? foodMenuEn : foodMenuFr;
-    if (!container || container.hidden) return null;
+    const container = foodMenu;
+    if (!container) return null;
     return container.querySelector(`[data-section-key="${key}"]`);
   }
 
@@ -508,8 +507,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateFoodSectionFromScroll() {
-    const container = currentLang === 'en' ? foodMenuEn : foodMenuFr;
-    if (!container || container.hidden) return;
+    const container = foodMenu;
+    if (!container) return;
     const sections = container.querySelectorAll('.menu-section');
     if (!sections.length) return;
     const headerBottom = foodHeader ? foodHeader.getBoundingClientRect().bottom : 0;
@@ -534,6 +533,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const src = teaImages[currentLang] || teaImages.en;
     teaImage.src = src;
     teaImage.alt = currentLang === 'en' ? 'Tea menu (English)' : 'Menu de thé (français)';
+  }
+
+  // Keep language updates consistent with tea/food by re-rendering coffee preview.
+  function setCoffeeImage() {
+    updateCoffeeBuildPreview();
   }
 
   function getCoffeeBuildLabel(key) {
@@ -1693,12 +1697,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function setFoodMenu() {
-    if (!foodMenuEn || !foodMenuFr) return;
+    if (!foodMenu) return;
     const templates = getActiveFoodMenuTemplates();
-    foodMenuEn.innerHTML = templates.en || '';
-    foodMenuFr.innerHTML = templates.fr || '';
-    foodMenuEn.hidden = currentLang !== 'en';
-    foodMenuFr.hidden = currentLang !== 'fr';
+    foodMenu.innerHTML = currentLang === 'en' ? (templates.en || '') : (templates.fr || '');
     ensureValidFoodSectionKey();
     updateFoodSectionFromScroll();
     collectMenuIcons();
@@ -1737,10 +1738,24 @@ document.addEventListener('DOMContentLoaded', () => {
     setLanguage(currentLang === 'en' ? 'fr' : 'en');
   }
 
+  function handleLanguageSwitcherInput(event) {
+    event?.preventDefault?.();
+    event?.stopPropagation?.();
+    if (foodSectionDropdownOpen) {
+      setFoodSectionDropdown(false);
+    }
+    toggleLanguage();
+  }
+
   langSwitchers.forEach(sw => {
-    sw.addEventListener('click', (event) => {
-      event.preventDefault();
-      toggleLanguage();
+    if (sw.id === 'foodLangSwitcher') return;
+    sw.addEventListener('click', handleLanguageSwitcherInput);
+    sw.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event?.preventDefault?.();
+        event?.stopPropagation?.();
+        handleLanguageSwitcherInput(event);
+      }
     });
   });
 
@@ -2139,6 +2154,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const foodSectionLabel = document.getElementById('foodSectionLabel');
   const foodSectionDropdownLayer = document.getElementById('foodSectionDropdownLayer');
   const foodSectionList = document.getElementById('foodSectionList');
+  const foodLangSwitcher = document.getElementById('foodLangSwitcher');
   const foodHeader = document.querySelector('#foodPage .food-header');
   let menuIcons = [];
   let iconRotationScheduled = false;
@@ -2826,6 +2842,29 @@ document.addEventListener('DOMContentLoaded', () => {
     coffeeHotBtn,
     coffeeIcedBtn
   ].forEach(attachUnavailableReasonHandler);
+
+  let lastFoodLanguageSwitchTime = 0;
+  function handleFoodLanguageSwitcherInput(event) {
+    event?.preventDefault?.();
+    event?.stopPropagation?.();
+    const now = Date.now();
+    if (now - lastFoodLanguageSwitchTime < 350) return;
+    lastFoodLanguageSwitchTime = now;
+    if (foodSectionDropdownOpen) {
+      setFoodSectionDropdown(false);
+    }
+    const nextLang = currentLang === 'en' ? 'fr' : 'en';
+    setLanguage(nextLang);
+  }
+
+  if (foodLangSwitcher) {
+    foodLangSwitcher.addEventListener('click', handleFoodLanguageSwitcherInput);
+    foodLangSwitcher.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        handleFoodLanguageSwitcherInput(event);
+      }
+    });
+  }
 
   if (foodSectionToggle) {
     foodSectionToggle.addEventListener('click', (event) => {
