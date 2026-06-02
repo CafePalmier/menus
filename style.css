@@ -987,17 +987,17 @@ html { overflow-x: hidden; }
 }
 .icon-gravlax {
   width: clamp(98px, 23vw, 168px);
-  bottom: calc(-10px - 2cm);
+  bottom: calc(-10px - 1cm);
   right: -2vw;
 }
 .icon-pancakes {
   width: clamp(86px, 20vw, 150px);
-  bottom: calc(-8px - 2cm);
+  bottom: calc(-8px - 1cm);
   right: -2vw;
 }
 .icon-pancakes-left {
   width: clamp(86px, 20vw, 150px);
-  bottom: calc(-8px - 2cm);
+  bottom: calc(-8px - 1cm);
   left: -2vw;
 }
 .icon-breakfast-left {
@@ -1053,15 +1053,15 @@ html { overflow-x: hidden; }
 
 @media (min-width: 900px) {
   .icon-gravlax {
-    bottom: calc(-10px - 3cm);
+    bottom: calc(-10px - 2cm);
   }
 
   .icon-pancakes {
-    bottom: calc(-8px - 3cm);
+    bottom: calc(-8px - 2cm);
   }
 
   .icon-pancakes-left {
-    bottom: calc(-8px - 3cm);
+    bottom: calc(-8px - 2cm);
   }
 
   .icon-poptart {
