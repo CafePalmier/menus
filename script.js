@@ -84,7 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
     glutenPill: { en: 'GF', fr: 'SG' },
     glutenText: { en: 'Gluten Free', fr: 'Sans gluten' },
     vegetarianText: { en: 'Vegetarian', fr: 'Végétarien' },
-    veganText: { en: 'Vegan', fr: 'Végétalien' }
+    veganText: { en: 'Vegan', fr: 'Végétalien' },
+    spicyText: { en: 'Spicy', fr: 'Épicée' }
   };
 
   function updateLabels() {
@@ -110,7 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
         { key: 'toast',        labels: { en: 'Toast',               fr: 'Toast' } },
         { key: 'french_toast', labels: { en: 'French Toast & Pancakes', fr: 'Pain doré & Pancakes' } },
         { key: 'bowls',        labels: { en: 'Bowls',               fr: 'Bols' } },
-        { key: 'soup',         labels: { en: 'Seasonal Soup',       fr: 'Soupe de saison' } },
         { key: 'sandwich',     labels: { en: 'Sandwich',            fr: 'Sandwich' } },
         { key: 'a_la_carte',   labels: { en: 'À la carte',          fr: 'À la carte' } }
       ],
@@ -125,66 +125,60 @@ document.addEventListener('DOMContentLoaded', () => {
       <section id="food-french-en" class="menu-section image-card" data-section-key="french_toast">
         <h2 class="sr-only">French Toast &amp; More</h2>
         <img src="Assets/menus/food/eng/french-toasts.png" alt="French toast and more menu" class="food-menu-image" loading="lazy" />
-        <img src="Assets/menus/food/icons/pancakes.png" alt="" aria-hidden="true" class="menu-icon icon-pancakes" />
+        <img src="Assets/menus/food/icons/pancakes.png" alt="" aria-hidden="true" class="menu-icon icon-pancakes-left" />
       </section>
 
       <section id="food-bowls-en" class="menu-section image-card" data-section-key="bowls">
         <h2 class="sr-only">Bowls</h2>
         <img src="Assets/menus/food/eng/bowls.png" alt="Bowls menu" class="food-menu-image" loading="lazy" />
-      </section>
-
-      <section id="food-soup-en" class="menu-section image-card" data-section-key="soup">
-        <h2 class="sr-only">Seasonal Soup</h2>
-        <img src="Assets/menus/food/eng/soup.png" alt="Seasonal soup menu" class="food-menu-image" loading="lazy" />
-        <img src="Assets/menus/food/icons/breakfastsandwich.png" alt="" aria-hidden="true" class="menu-icon icon-breakfast-left" />
+        <img src="Assets/menus/food/icons/breakfastsandwich.png" alt="" aria-hidden="true" class="menu-icon icon-breakfast-right" />
       </section>
 
       <section id="food-sandwich-en" class="menu-section image-card" data-section-key="sandwich">
         <h2 class="sr-only">Sandwich</h2>
         <img src="Assets/menus/food/eng/sandwiches.png" alt="Sandwich menu" class="food-menu-image" loading="lazy" />
-        <img src="Assets/menus/food/icons/poptart.png" alt="" aria-hidden="true" class="menu-icon icon-poptart" />
       </section>
 
       <section id="food-alacarte-en" class="menu-section image-card" data-section-key="a_la_carte">
         <h2 class="sr-only">À la carte</h2>
         <img src="Assets/menus/food/eng/a-la-carte.png" alt="À la carte menu" class="food-menu-image" loading="lazy" />
-        <img src="Assets/menus/food/eng/add.png" alt="Add-ons menu" class="food-menu-image stacked" loading="lazy" />
+        <div class="food-stack-with-icon">
+          <img src="Assets/menus/food/icons/poptart.png" alt="" aria-hidden="true" class="menu-icon icon-poptart-between" />
+          <img src="Assets/menus/food/eng/add.png" alt="Add-ons menu" class="food-menu-image stacked" loading="lazy" />
+        </div>
       </section>
     `,
         fr: `
       <section id="food-toast-fr" class="menu-section image-card" data-section-key="toast">
         <h2 class="sr-only">Toast</h2>
-        <img src="Assets/menus/food/fra/toasts-fra.png" alt="Menu Toasts" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/fra/toasts.png" alt="Menu Toasts" class="food-menu-image" loading="lazy" />
         <img src="Assets/menus/food/icons/gravlax.png" alt="" aria-hidden="true" class="menu-icon icon-gravlax" />
       </section>
 
       <section id="food-french-fr" class="menu-section image-card" data-section-key="french_toast">
         <h2 class="sr-only">Pain Doré &amp; Plus</h2>
         <img src="Assets/menus/food/fra/pain-dores.png" alt="Menu pain doré et plus" class="food-menu-image" loading="lazy" />
-        <img src="Assets/menus/food/icons/pancakes.png" alt="" aria-hidden="true" class="menu-icon icon-pancakes" />
+        <img src="Assets/menus/food/icons/pancakes.png" alt="" aria-hidden="true" class="menu-icon icon-pancakes-left" />
       </section>
 
       <section id="food-bowls-fr" class="menu-section image-card" data-section-key="bowls">
         <h2 class="sr-only">Bols</h2>
         <img src="Assets/menus/food/fra/bols.png" alt="Menu bols" class="food-menu-image" loading="lazy" />
-      </section>
-
-      <section id="food-soup-fr" class="menu-section image-card" data-section-key="soup">
-        <h2 class="sr-only">Soupe de Saison</h2>
-        <img src="Assets/menus/food/fra/soupe.png" alt="Menu soupe de saison" class="food-menu-image" loading="lazy" />
         <img src="Assets/menus/food/icons/breakfastsandwich.png" alt="" aria-hidden="true" class="menu-icon icon-breakfast-right" />
       </section>
 
       <section id="food-sandwich-fr" class="menu-section image-card" data-section-key="sandwich">
         <h2 class="sr-only">Sandwich</h2>
         <img src="Assets/menus/food/fra/sandwichs.png" alt="Menu sandwichs" class="food-menu-image" loading="lazy" />
-        <img src="Assets/menus/food/icons/poptart.png" alt="" aria-hidden="true" class="menu-icon icon-poptart" />
       </section>
 
       <section id="food-alacarte-fr" class="menu-section image-card" data-section-key="a_la_carte">
         <h2 class="sr-only">À la carte</h2>
-        <img src="Assets/menus/food/fra/a-la-carte-fra.png" alt="Menu à la carte" class="food-menu-image" loading="lazy" />
-        <img src="Assets/menus/food/fra/ajouter.png" alt="Menu ajouter" class="food-menu-image stacked" loading="lazy" />
+        <img src="Assets/menus/food/fra/a-la-carte.png" alt="Menu à la carte" class="food-menu-image" loading="lazy" />
+        <div class="food-stack-with-icon">
+          <img src="Assets/menus/food/icons/poptart.png" alt="" aria-hidden="true" class="menu-icon icon-poptart-between" />
+          <img src="Assets/menus/food/fra/add.png" alt="Menu ajouter" class="food-menu-image stacked" loading="lazy" />
+        </div>
       </section>
     `
       }
@@ -327,6 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const legendGfText = document.getElementById('legendGfText');
   const legendVegetarianText = document.getElementById('legendVegetarianText');
   const legendVeganText = document.getElementById('legendVeganText');
+  const legendSpicyText = document.getElementById('legendSpicyText');
   let currentFoodSectionKey = getDefaultFoodSectionKey();
 
   const teaImages = {
@@ -1718,6 +1713,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (legendVeganText) {
       legendVeganText.textContent = legendTranslations.veganText[currentLang] || legendTranslations.veganText.en;
     }
+    if (legendSpicyText) {
+      legendSpicyText.textContent = legendTranslations.spicyText[currentLang] || legendTranslations.spicyText.en;
+    }
   }
 
   function setLanguage(lang) {
@@ -2276,22 +2274,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const anchor = parseFloat(icon.dataset.anchor || '0');
       const centerY = anchor - scrollTop;
       const progress = Math.min(Math.max(centerY / vh, 0), 1); // 1 at bottom, 0 at top
-      const angle = -45 * progress; // 0° at top, -45° at bottom
+      const angle = -8 + (-45 * progress); // slightly counterclockwise at rest, more as it moves down
       icon.style.transform = `rotate(${angle}deg)`;
     });
   }
 
-  let lastRotationTs = 0;
-  const ROTATION_FRAME_MS = 120; // ~8 fps to keep it light
-
-  function scheduleIconRotation(timestamp) {
+  function scheduleIconRotation() {
     if (!iconMotionEnabled || iconRotationScheduled) return;
     iconRotationScheduled = true;
-    requestAnimationFrame((ts) => {
+    requestAnimationFrame(() => {
       iconRotationScheduled = false;
-      const now = ts || performance.now();
-      if (now - lastRotationTs < ROTATION_FRAME_MS) return;
-      lastRotationTs = now;
       updateIconRotation();
     });
   }

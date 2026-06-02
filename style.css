@@ -732,6 +732,12 @@ html { overflow-x: hidden; }
   align-items: center;
   gap: 0.45rem;
 }
+.legend-icon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
 .legend-pill {
   min-width: 28px;
   height: 20px;
@@ -763,6 +769,19 @@ html { overflow-x: hidden; }
   font-size: 0.88rem;
   font-weight: 600;
   white-space: nowrap;
+}
+@media (max-width: 420px) {
+  .food-legend {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, max-content));
+    justify-content: center;
+    gap: 0.45rem 0.9rem;
+    flex-wrap: initial;
+  }
+
+  .legend-item {
+    justify-content: flex-start;
+  }
 }
 .menu-tag {
   display: inline-flex;
@@ -951,6 +970,12 @@ html { overflow-x: hidden; }
 .food-menu-image.stacked {
   margin-top: 0.6rem;
 }
+.food-stack-with-icon {
+  position: relative;
+}
+.food-stack-with-icon .food-menu-image.stacked {
+  margin-bottom: 0;
+}
 .menu-icon {
   position: absolute;
   z-index: 6;
@@ -961,23 +986,28 @@ html { overflow-x: hidden; }
   transition: transform 120ms linear;
 }
 .icon-gravlax {
-  width: clamp(117px, 27.5vw, 202px);
-  bottom: calc(-10px - 1cm);
+  width: clamp(98px, 23vw, 168px);
+  bottom: calc(-10px - 2cm);
   right: -2vw;
 }
 .icon-pancakes {
-  width: clamp(111px, 26vw, 194px);
-  bottom: calc(-8px - 1.5cm);
+  width: clamp(86px, 20vw, 150px);
+  bottom: calc(-8px - 2cm);
   right: -2vw;
 }
+.icon-pancakes-left {
+  width: clamp(86px, 20vw, 150px);
+  bottom: calc(-8px - 2cm);
+  left: -2vw;
+}
 .icon-breakfast-left {
-  width: clamp(110px, 25vw, 180px);
-  bottom: calc(-8px - 2vw);
+  width: clamp(84px, 19vw, 138px);
+  bottom: calc(-8px - 2vw - 1cm);
   left: -2vw;
 }
 .icon-breakfast-right {
-  width: clamp(110px, 25vw, 180px);
-  bottom: calc(-8px - 2vw);
+  width: clamp(84px, 19vw, 138px);
+  bottom: calc(-8px - 2vw - 1cm);
   right: -2vw;
 }
 .icon-poptart {
@@ -985,18 +1015,65 @@ html { overflow-x: hidden; }
   bottom: calc(-10px - 1.5cm);
   right: -1.5vw;
 }
+.icon-poptart-left {
+  width: clamp(100px, 24vw, 170px);
+  bottom: calc(-10px - 1.5cm);
+  left: -1.5vw;
+}
+.icon-poptart-between {
+  width: clamp(90px, 21.5vw, 150px);
+  top: calc(-0.85rem - 1cm);
+  left: -1.5vw;
+}
+
+@media (max-width: 539px) {
+  .icon-gravlax {
+    width: clamp(110px, 29vw, 168px);
+  }
+
+  .icon-pancakes,
+  .icon-pancakes-left {
+    width: clamp(96px, 25vw, 150px);
+  }
+
+  .icon-breakfast-left,
+  .icon-breakfast-right {
+    width: clamp(94px, 24vw, 138px);
+  }
+
+  .icon-poptart,
+  .icon-poptart-left {
+    width: clamp(110px, 27vw, 170px);
+  }
+
+  .icon-poptart-between {
+    width: clamp(100px, 24vw, 150px);
+  }
+}
 
 @media (min-width: 900px) {
   .icon-gravlax {
-    bottom: calc(-10px - 2cm);
+    bottom: calc(-10px - 3cm);
   }
 
   .icon-pancakes {
-    bottom: calc(-8px - 2.5cm);
+    bottom: calc(-8px - 3cm);
+  }
+
+  .icon-pancakes-left {
+    bottom: calc(-8px - 3cm);
   }
 
   .icon-poptart {
     bottom: calc(-10px - 2cm);
+  }
+
+  .icon-poptart-left {
+    bottom: calc(-10px - 2cm);
+  }
+
+  .icon-poptart-between {
+    top: calc(-1.2rem - 1cm);
   }
 }
 
