@@ -1051,6 +1051,24 @@ html { overflow-x: hidden; }
   }
 }
 
+@media (max-width: 430px) {
+  .icon-pancakes,
+  .icon-pancakes-left {
+    bottom: calc(-8px - 1.5cm);
+  }
+}
+
+@media (min-width: 540px) and (max-width: 899px) {
+  .icon-gravlax {
+    bottom: calc(-10px - 2cm);
+  }
+
+  .icon-pancakes,
+  .icon-pancakes-left {
+    bottom: calc(-8px - 2cm);
+  }
+}
+
 @media (min-width: 900px) {
   .icon-gravlax {
     bottom: calc(-10px - 2cm);
