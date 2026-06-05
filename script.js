@@ -11,24 +11,24 @@ document.addEventListener('DOMContentLoaded', () => {
     coffeeDiscover: { en: 'Discover', fr: 'Découvrir' },
     coffeeBuild: { en: 'Build', fr: 'Composer' },
     coffeeBuildStart: { en: 'Customize your drink below and see how to order it at the café', fr: 'Personnalisez votre boisson ci-dessous et voyez comment la commander au café' },
-    coffeeBuildChooseBase: { en: 'Drink Base', fr: 'Base de boisson' },
-    coffeeBuildChooseBeans: { en: 'Espresso Beans', fr: 'Grains espresso' },
-    coffeeBuildChooseDripBeans: { en: 'Drip Beans', fr: 'Grains filtre' },
+    coffeeBuildChooseBase: { en: 'Choose your drink base', fr: 'Choisissez votre base de boisson' },
+    coffeeBuildChooseBeans: { en: 'Choose your espresso beans', fr: 'Choisissez vos grains espresso' },
+    coffeeBuildChooseDripBeans: { en: 'Choose your drip beans', fr: 'Choisissez vos grains filtre' },
     coffeeTeaFlavorChai: { en: 'Chai', fr: 'Chai' },
     coffeeTeaFlavorMatcha: { en: 'Matcha', fr: 'Matcha' },
     coffeeTeaFlavorGinger: { en: 'Ginger Turmeric', fr: 'Gingembre curcuma' },
     coffeeTeaFlavorEarlGrey: { en: 'Earl Grey (London Fog)', fr: 'Earl Grey (London Fog)' },
     coffeeTeaFlavorSerenitea: { en: 'Serenitea', fr: 'Serenitea' },
-    coffeeBuildChooseService: { en: 'Service', fr: 'Service' },
-    coffeeBuildChooseTemperature: { en: 'Temperature', fr: 'Température' },
-    coffeeBuildChooseMilkType: { en: 'Milk Type', fr: 'Type de lait' },
-    coffeeBuildChooseFlavours: { en: 'Flavours', fr: 'Saveurs' },
-    coffeeBuildChooseShots: { en: 'Shots', fr: 'Shots' },
-    coffeeBuildChooseSteamedMilk: { en: 'Steamed milk', fr: 'Lait vapeur' },
-    coffeeBuildChooseMilkQty: { en: 'Milk (oz)', fr: 'Lait (oz)' },
-    coffeeBuildChooseWaterQty: { en: 'Hot Water (oz)', fr: 'Eau chaude (oz)' },
-    coffeeBuildChooseWaterQtyIced: { en: 'Water (oz)', fr: 'Eau (oz)' },
-    coffeeBuildChooseFoamTexture: { en: 'Foam Texture', fr: 'Texture de mousse' },
+    coffeeBuildChooseService: { en: 'Where is it for?', fr: 'C’est pour où?' },
+    coffeeBuildChooseTemperature: { en: 'How would you like it?', fr: 'Comment la voulez-vous?' },
+    coffeeBuildChooseMilkType: { en: 'Which milk would you like?', fr: 'Quel lait voulez-vous?' },
+    coffeeBuildChooseFlavours: { en: 'Would you like a flavour?', fr: 'Voulez-vous une saveur?' },
+    coffeeBuildChooseShots: { en: 'Would you like extra espresso?', fr: 'Voulez-vous plus d’espresso?' },
+    coffeeBuildChooseSteamedMilk: { en: 'Would you like steamed milk?', fr: 'Voulez-vous du lait vapeur?' },
+    coffeeBuildChooseMilkQty: { en: 'How much milk would you like? (oz)', fr: 'Combien de lait voulez-vous? (oz)' },
+    coffeeBuildChooseWaterQty: { en: 'How much hot water would you like? (oz)', fr: 'Combien d’eau chaude voulez-vous? (oz)' },
+    coffeeBuildChooseWaterQtyIced: { en: 'How much water would you like? (oz)', fr: 'Combien d’eau voulez-vous? (oz)' },
+    coffeeBuildChooseFoamTexture: { en: 'How much foam would you like?', fr: 'Combien de mousse voulez-vous?' },
     coffeeBebeccino: { en: 'Bebeccino', fr: 'Bebeccino' },
     coffeeBaseEspresso: { en: 'Espresso', fr: 'Espresso' },
     coffeeBaseTea: { en: 'Tea Latté', fr: 'Thé latté' },
@@ -1236,6 +1236,30 @@ document.addEventListener('DOMContentLoaded', () => {
       ? COFFEE_WATER_VALUES_ICE
       : (coffeeBuildState.service === 'stay' ? COFFEE_WATER_VALUES_STAY : COFFEE_WATER_VALUES_TOGO);
     const hasQualifyingBaseForTemperature = selectedBases.some(base => base !== 'drip');
+    if (chocolateMilkMode && coffeeBuildState.waterIndex > 0) {
+      coffeeBuildState.waterIndex = 0;
+    }
+    if (isIcedSelection && !icedEspresso && coffeeBuildState.waterIndex > 0) {
+      coffeeBuildState.waterIndex = 0;
+    }
+    if (coffeeBuildState.waterIndex > waterValues.length - 1) {
+      coffeeBuildState.waterIndex = waterValues.length - 1;
+    }
+    if (icedEspresso && coffeeBuildState.milkIndex > 3) {
+      coffeeBuildState.milkIndex = 3;
+    }
+    if (chocolateMilkMode) {
+      if (coffeeBuildState.milkIndex < 1) {
+        coffeeBuildState.milkIndex = 1;
+      }
+      if (coffeeBuildState.milkIndex > (icedChocolate ? 2 : 3)) {
+        coffeeBuildState.milkIndex = icedChocolate ? 2 : 3;
+      }
+    }
+    const waterHasQuantity = coffeeBuildState.waterIndex > 0;
+    if (waterHasQuantity && coffeeBuildState.milkIndex > 0) {
+      coffeeBuildState.milkIndex = 0;
+    }
     const imageSrc = getCoffeeBuildImageSrc(selectedBases, folder);
     if (espressoSelected && !espressoOnly && (coffeeBuildState.bean === 'feature' || !coffeeBuildState.bean)) {
       coffeeBuildState.bean = 'palmier';
@@ -1378,34 +1402,24 @@ document.addEventListener('DOMContentLoaded', () => {
     setCoffeeBuildOptionState(
       coffeeBeanPalmierBtn,
       palmierBeanSelected || halfCafSelected,
-      featureBeanSelected
+      false
     );
     setCoffeeBuildOptionState(
       coffeeBeanDecafBtn,
       decafBeanSelected || halfCafSelected,
-      featureBeanSelected
+      false
     );
     setCoffeeBuildOptionState(
       coffeeBeanFeatureBtn,
       featureBeanSelected,
-      !espressoOnly || palmierBeanSelected || decafBeanSelected || halfCafSelected
+      !espressoOnly
     );
-    const beanConflictReasonEn = "Feature Espresso can't be combined with Palmier or Decaf.";
-    const beanConflictReasonFr = "L'espresso vedette ne peut pas être combiné avec Palmier ou décaf.";
-    setCoffeeBuildUnavailableReason(
-      coffeeBeanPalmierBtn,
-      featureBeanSelected ? beanConflictReasonEn : '',
-      featureBeanSelected ? beanConflictReasonFr : ''
-    );
-    setCoffeeBuildUnavailableReason(
-      coffeeBeanDecafBtn,
-      featureBeanSelected ? beanConflictReasonEn : '',
-      featureBeanSelected ? beanConflictReasonFr : ''
-    );
+    setCoffeeBuildUnavailableReason(coffeeBeanPalmierBtn);
+    setCoffeeBuildUnavailableReason(coffeeBeanDecafBtn);
     setCoffeeBuildUnavailableReason(
       coffeeBeanFeatureBtn,
-      (!espressoOnly || palmierBeanSelected || decafBeanSelected || halfCafSelected) ? beanConflictReasonEn : '',
-      (!espressoOnly || palmierBeanSelected || decafBeanSelected || halfCafSelected) ? beanConflictReasonFr : ''
+      !espressoOnly ? 'Feature beans are only available on straight espresso drinks.' : '',
+      !espressoOnly ? "Les grains vedette sont seulement disponibles pour les boissons espresso seules." : ''
     );
     setCoffeeBuildOptionState(coffeeDripBeanNightHawkBtn, coffeeBuildState.dripBean === 'night-hawk');
     setCoffeeBuildOptionState(coffeeDripBeanFeatureBtn, coffeeBuildState.dripBean === 'feature');
@@ -1450,19 +1464,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (coffeeEspressoOnlyControls) {
       coffeeEspressoOnlyControls.hidden = !(espressoOnly || chocolateMilkMode);
     }
-    if (chocolateMilkMode && coffeeBuildState.waterIndex > 0) {
-      coffeeBuildState.waterIndex = 0;
-    }
-    if (isIcedSelection && !icedEspresso && coffeeBuildState.waterIndex > 0) {
-      coffeeBuildState.waterIndex = 0;
-    }
-    if (coffeeBuildState.waterIndex > waterValues.length - 1) {
-      coffeeBuildState.waterIndex = waterValues.length - 1;
-    }
-    const waterHasQuantity = coffeeBuildState.waterIndex > 0;
-    if (waterHasQuantity && coffeeBuildState.milkIndex > 0) {
-      coffeeBuildState.milkIndex = 0;
-    }
     const steamedGroup = document.querySelector('.coffee-build-steamed-group');
     if (steamedGroup) {
       steamedGroup.hidden = (espressoOnly && !waterHasQuantity) || chocolateMilkMode || teaSelected;
@@ -1470,17 +1471,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (coffeeMilkSlider) {
       coffeeMilkSlider.min = chocolateMilkMode ? '1' : '0';
       coffeeMilkSlider.max = icedChocolate ? '2' : (icedEspresso || chocolateMilkMode) ? '3' : '7';
-      if (icedEspresso && coffeeBuildState.milkIndex > 3) {
-        coffeeBuildState.milkIndex = 3;
-      }
-      if (chocolateMilkMode) {
-        if (coffeeBuildState.milkIndex < 1) {
-          coffeeBuildState.milkIndex = 1;
-        }
-        if (coffeeBuildState.milkIndex > (icedChocolate ? 2 : 3)) {
-          coffeeBuildState.milkIndex = icedChocolate ? 2 : 3;
-        }
-      }
       coffeeMilkSlider.value = String(coffeeBuildState.milkIndex);
     }
     if (coffeeMilkSliderSteps) {
@@ -1611,20 +1601,32 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
     if (type === 'bean') {
+      const selectedBases = Array.isArray(coffeeBuildState.base) ? coffeeBuildState.base : [];
+      const espressoSelected = selectedBases.includes('espresso');
       if (value === 'feature') {
-        coffeeBuildState.bean = coffeeBuildState.bean === 'feature' ? null : 'feature';
+        coffeeBuildState.bean = coffeeBuildState.bean === 'feature'
+          ? (espressoSelected ? 'feature' : null)
+          : 'feature';
       } else if (value === 'palmier') {
-        coffeeBuildState.bean = coffeeBuildState.bean === 'palmier'
-          ? null
-          : (coffeeBuildState.bean === 'decaf'
-            ? 'half-caf'
-            : (coffeeBuildState.bean === 'half-caf' ? 'decaf' : 'palmier'));
+        if (coffeeBuildState.bean === 'palmier') {
+          coffeeBuildState.bean = espressoSelected ? 'feature' : null;
+        } else if (coffeeBuildState.bean === 'decaf') {
+          coffeeBuildState.bean = 'half-caf';
+        } else if (coffeeBuildState.bean === 'half-caf') {
+          coffeeBuildState.bean = 'decaf';
+        } else {
+          coffeeBuildState.bean = 'palmier';
+        }
       } else if (value === 'decaf') {
-        coffeeBuildState.bean = coffeeBuildState.bean === 'decaf'
-          ? null
-          : (coffeeBuildState.bean === 'palmier'
-            ? 'half-caf'
-            : (coffeeBuildState.bean === 'half-caf' ? 'palmier' : 'decaf'));
+        if (coffeeBuildState.bean === 'decaf') {
+          coffeeBuildState.bean = espressoSelected ? 'feature' : null;
+        } else if (coffeeBuildState.bean === 'palmier') {
+          coffeeBuildState.bean = 'half-caf';
+        } else if (coffeeBuildState.bean === 'half-caf') {
+          coffeeBuildState.bean = 'palmier';
+        } else {
+          coffeeBuildState.bean = 'decaf';
+        }
       }
       coffeeBuildState.beanCustomized = true;
     }
