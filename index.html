@@ -20,7 +20,7 @@
     <div class="container">
       <!-- Home page wrapper: everything visible on the home screen goes here -->
       <div id="homePage">
-        <img src="Assets/palmier-logo.png" alt="Palmier" class="logo" />
+        <img id="homeLogo" src="Assets/palmier-logo.png" alt="Palmier" class="logo" />
 
         <!-- Social media buttons (now anchors) -->
         <div class="social-row">
@@ -59,7 +59,7 @@
         </div>
 
         <!-- Grid of menu tiles -->
-        <div class="tile-grid">
+        <div id="homeTileGrid" class="tile-grid">
           <div id="foodBtn" class="tile">
             <div class="tile-content">
               <img src="Assets/food.png" alt="Food icon" />
@@ -82,6 +82,12 @@
             <div class="tile-content">
               <img src="Assets/cocktail.png" alt="Cocktails icon" />
               <span class="label" data-key="cocktails">Cocktails</span>
+            </div>
+          </div>
+          <div id="icedDrinksBtn" class="tile" hidden>
+            <div class="tile-content">
+              <img src="Assets/iced-drinks.png" alt="Iced drinks icon" />
+              <span class="label" data-key="icedDrinks">Iced Drinks</span>
             </div>
           </div>
         </div>
@@ -170,6 +176,24 @@
         </div>
         <img id="teaImage" class="menu-image" src="Assets/menus/tea-eng.png" alt="Tea menu (English)" />
       </div><!-- end of teaPage -->
+
+      <!-- Iced drinks page -->
+      <div id="icedDrinksPage" class="menu-page tea-page" style="display:none;">
+        <div class="page-header">
+          <button id="backIcedDrinks" class="back-button compact">
+            <span class="back-arrow" aria-hidden="true"></span>
+            <span class="sr-only">Back</span>
+          </button>
+          <div class="page-header-lang">
+            <div id="icedDrinksLangSwitcher" class="language-switcher inline-switcher fra-active" data-lang-switcher>
+              <div class="toggle"></div>
+              <span class="eng">ENG</span>
+              <span class="fra">FRA</span>
+            </div>
+          </div>
+        </div>
+        <img id="icedDrinksImage" class="menu-image" src="Assets/menus/iced-drinks.png" alt="Iced drinks menu" />
+      </div><!-- end of icedDrinksPage -->
 
       <!-- Coffee menu page -->
       <div id="coffeePage" class="menu-page coffee-page" style="display:none;">
@@ -358,10 +382,11 @@
               </div>
             </section>
             <section id="coffeeFlavorGroup" class="coffee-build-group coffee-build-milk-type-group coffee-build-flavor-group" aria-labelledby="coffeeFlavorGroupLabel" hidden>
-              <h2 id="coffeeFlavorGroupLabel" class="coffee-build-group-title label" data-key="coffeeBuildChooseFlavours">Flavours</h2>
+              <h2 id="coffeeFlavorGroupLabel" class="coffee-build-group-title label" data-key="coffeeBuildChooseFlavours">Would you like a sweetener?</h2>
               <div class="coffee-build-milk-type-options coffee-build-flavor-options">
                 <button id="coffeeFlavorVanillaBtn" class="coffee-build-milk-type-option label" data-key="coffeeFlavorVanilla" type="button">Vanilla</button>
                 <button id="coffeeFlavorMapleBtn" class="coffee-build-milk-type-option label" data-key="coffeeFlavorMaple" type="button">Maple</button>
+                <button id="coffeeFlavorSimpleSyrupBtn" class="coffee-build-milk-type-option label" data-key="coffeeFlavorSimpleSyrup" type="button" hidden>Simple Syrup</button>
               </div>
             </section>
             <section id="coffeeShotGroup" class="coffee-build-group coffee-build-milk-type-group coffee-build-flavor-group" aria-labelledby="coffeeShotGroupLabel" hidden>

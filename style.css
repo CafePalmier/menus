@@ -16,6 +16,10 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -373,6 +377,47 @@ html { overflow-x: hidden; }
   gap: 1.5rem;
   margin: 2rem 1rem;
 }
+body[data-site-season="summer"] .tile-grid {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+body[data-site-season="summer"] .tile-grid .tile {
+  aspect-ratio: 1 / 1;
+}
+body[data-site-season="summer"] .tile-grid #foodBtn,
+body[data-site-season="summer"] .tile-grid #coffeeBtn {
+  grid-column: span 3;
+}
+body[data-site-season="summer"] .tile-grid #teaBtn,
+body[data-site-season="summer"] .tile-grid #icedDrinksBtn,
+body[data-site-season="summer"] .tile-grid #cocktailsBtn {
+  grid-column: span 2;
+}
+body[data-site-season="summer"] .tile-grid #teaBtn .tile-content,
+body[data-site-season="summer"] .tile-grid #icedDrinksBtn .tile-content,
+body[data-site-season="summer"] .tile-grid #cocktailsBtn .tile-content {
+  padding: 0.75rem 0.2rem 0.65rem;
+  gap: 0.22rem;
+  justify-content: center;
+}
+body[data-site-season="summer"] .tile-grid #teaBtn .tile-content img,
+body[data-site-season="summer"] .tile-grid #icedDrinksBtn .tile-content img,
+body[data-site-season="summer"] .tile-grid #cocktailsBtn .tile-content img {
+  max-width: 66%;
+  max-height: 66%;
+}
+body[data-site-season="summer"] .tile-grid #teaBtn .tile-content .label,
+body[data-site-season="summer"] .tile-grid #icedDrinksBtn .tile-content .label,
+body[data-site-season="summer"] .tile-grid #cocktailsBtn .tile-content .label {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 0.18rem;
+  font-size: clamp(0.74rem, 2.7vw, 1.02rem);
+  line-height: 1.05;
+  text-align: center;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
 .tile {
   position: relative;
   background-color: transparent;
@@ -424,6 +469,27 @@ html { overflow-x: hidden; }
 .tile.pressed .tile-content {
   transform: translate(var(--shadow-offset), var(--shadow-offset));
   box-shadow: none;
+}
+
+@media (max-width: 420px) {
+  body[data-site-season="summer"] .tile-grid {
+    gap: 1rem;
+    margin: 1.6rem 0.75rem;
+  }
+
+  body[data-site-season="summer"] .tile-grid #teaBtn .tile-content .label,
+  body[data-site-season="summer"] .tile-grid #icedDrinksBtn .tile-content .label,
+  body[data-site-season="summer"] .tile-grid #cocktailsBtn .tile-content .label {
+    font-size: clamp(0.68rem, 3.25vw, 0.9rem);
+  }
+}
+
+@media (max-width: 900px) and (orientation: portrait) {
+  body[data-site-season="summer"] .tile-grid #teaBtn .tile-content .label,
+  body[data-site-season="summer"] .tile-grid #icedDrinksBtn .tile-content .label,
+  body[data-site-season="summer"] .tile-grid #cocktailsBtn .tile-content .label {
+    font-size: clamp(0.78rem, 2.9vw, 1rem);
+  }
 }
 
 /* Large (coffee shelf) and review buttons */
@@ -1288,6 +1354,15 @@ html { overflow-x: hidden; }
 .tea-page .menu-image {
   margin: 0.6rem auto 1.2rem;
 }
+#icedDrinksPage .menu-image {
+  width: calc(100% - 2rem);
+  max-width: 460px;
+}
+@media (min-width: 768px) {
+  #icedDrinksPage .menu-image {
+    max-width: 690px;
+  }
+}
 .coffee-page .menu-image-wrapper {
   margin: -3.5rem auto calc(9rem + env(safe-area-inset-bottom, 0px));
   width: calc(100% - 2rem);
@@ -1755,6 +1830,9 @@ html { overflow-x: hidden; }
 .coffee-build-flavor-options {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
+.coffee-build-flavor-options.has-three-options {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
 .coffee-build-milk-type-option {
   appearance: none;
   border: 2px solid color-mix(in srgb, var(--color-brown) 55%, white 45%);
@@ -2015,8 +2093,13 @@ html { overflow-x: hidden; }
   height: 100%;
   padding: 0.45rem 0.8rem;
   font-family: "ruddy", sans-serif;
-  font-size: 0.92rem;
+  font-size: clamp(0.72rem, 2.6vw, 0.92rem);
   font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  hyphens: none;
   transition: color 0.16s ease-out, opacity 0.16s ease-out;
 }
 .coffee-build-pill-option.is-active {
@@ -2107,7 +2190,7 @@ html { overflow-x: hidden; }
 
   .coffee-build-pill-option {
     padding: 0.35rem 0.48rem;
-    font-size: 0.84rem;
+    font-size: clamp(0.64rem, 2.8vw, 0.84rem);
     white-space: nowrap;
   }
 

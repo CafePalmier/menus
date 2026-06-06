@@ -2,12 +2,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const langSwitchers = document.querySelectorAll('[data-lang-switcher]');
   const mainLangSwitcher = document.getElementById('langSwitcher');
   let currentLang = 'fr';
+  // Set to 'winter' to restore the original 2x2 home grid.
+  const SITE_SEASON = 'summer';
 
   const translations = {
     food:      { en: 'Food',         fr: 'Nourriture' },
     tea:       { en: 'Tea',          fr: 'Thé' },
     cocktails: { en: 'Cocktails',    fr: 'Cocktails' },
     coffee:    { en: 'Coffee',       fr: 'Café' },
+    icedDrinks:{ en: 'Iced Drinks',  fr: 'Boissons glacées' },
     coffeeDiscover: { en: 'Discover', fr: 'Découvrir' },
     coffeeBuild: { en: 'Build', fr: 'Composer' },
     coffeeBuildStart: { en: 'Customize your drink below and see how to order it at the café', fr: 'Personnalisez votre boisson ci-dessous et voyez comment la commander au café' },
@@ -20,10 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
     coffeeTeaFlavorEarlGrey: { en: 'Earl Grey (London Fog)', fr: 'Earl Grey (London Fog)' },
     coffeeTeaFlavorSerenitea: { en: 'Serenitea', fr: 'Serenitea' },
     coffeeBuildChooseService: { en: 'Where is it for?', fr: 'C’est pour où?' },
-    coffeeBuildChooseTemperature: { en: 'How would you like it?', fr: 'Comment la voulez-vous?' },
+    coffeeBuildChooseTemperature: { en: 'What temperature?', fr: 'Quelle température?' },
     coffeeBuildChooseMilkType: { en: 'Which milk would you like?', fr: 'Quel lait voulez-vous?' },
-    coffeeBuildChooseFlavours: { en: 'Would you like a flavour?', fr: 'Voulez-vous une saveur?' },
-    coffeeBuildChooseShots: { en: 'Would you like extra espresso?', fr: 'Voulez-vous plus d’espresso?' },
+    coffeeBuildChooseFlavours: { en: 'Would you like a sweetener?', fr: 'Voulez-vous un sucrant?' },
+    coffeeBuildChooseShots: { en: 'More or less espresso?', fr: 'Plus ou moins d’espresso?' },
     coffeeBuildChooseSteamedMilk: { en: 'Would you like steamed milk?', fr: 'Voulez-vous du lait vapeur?' },
     coffeeBuildChooseMilkQty: { en: 'How much milk would you like? (oz)', fr: 'Combien de lait voulez-vous? (oz)' },
     coffeeBuildChooseWaterQty: { en: 'How much hot water would you like? (oz)', fr: 'Combien d’eau chaude voulez-vous? (oz)' },
@@ -58,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     coffeeMilkTypeLactoseFree: { en: 'Lactose Free', fr: 'Sans lactose' },
     coffeeFlavorVanilla: { en: 'Vanilla', fr: 'Vanille' },
     coffeeFlavorMaple: { en: 'Maple', fr: 'Érable' },
+    coffeeFlavorSimpleSyrup: { en: 'Simple Syrup', fr: 'Sirop simple' },
     coffeeShotSingle: { en: 'Single Shot', fr: 'Simple shot' },
     coffeeShotExtra: { en: 'Extra Shot', fr: 'Extra shot' },
     coffeeFoamThin: { en: 'Thin (flat white foam)', fr: 'Fine (mousse flat white)' },
@@ -93,7 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (el.id === 'coffeeBuildCaption') return;
       const key = el.getAttribute('data-key');
       if (translations[key]) {
-        el.textContent = translations[key][currentLang];
+        const value = translations[key][currentLang];
+        if (key === 'icedDrinks' && currentLang === 'fr') {
+          el.innerHTML = 'Boissons<br>glacées';
+        } else {
+          el.textContent = value;
+        }
       }
     });
   }
@@ -315,6 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return sections.length ? sections[0].key : null;
   }
 
+  const homeLogo = document.getElementById('homeLogo');
   const teaImage = document.getElementById('teaImage');
   const foodMenu = document.getElementById('foodMenu');
   const legendGfPill = document.getElementById('legendGfPill');
@@ -328,6 +338,23 @@ document.addEventListener('DOMContentLoaded', () => {
     en: 'Assets/menus/tea-eng.png',
     fr: 'Assets/menus/tea-fra.png'
   };
+  const HOME_LOGO_IMAGES = {
+    en: 'Assets/logo-eng.png',
+    fr: 'Assets/logo-fra.png'
+  };
+  const ICED_DRINKS_IMAGES = {
+    en: 'Assets/menus/iced-drinks-eng.png',
+    fr: 'Assets/menus/iced-drinks-fra.png'
+  };
+
+  function applySiteSeason(season = SITE_SEASON) {
+    const nextSeason = season === 'summer' ? 'summer' : 'winter';
+    document.body.dataset.siteSeason = nextSeason;
+    const isSummer = nextSeason === 'summer';
+    if (icedDrinksBtn) {
+      icedDrinksBtn.hidden = !isSummer;
+    }
+  }
 
   function getFoodSectionLabel(key, lang = currentLang) {
     if (!key) return '';
@@ -530,6 +557,17 @@ document.addEventListener('DOMContentLoaded', () => {
     teaImage.alt = currentLang === 'en' ? 'Tea menu (English)' : 'Menu de thé (français)';
   }
 
+  function setHomeLogo() {
+    if (!homeLogo) return;
+    homeLogo.src = HOME_LOGO_IMAGES[currentLang] || HOME_LOGO_IMAGES.fr;
+  }
+
+  function setIcedDrinksImage() {
+    if (!icedDrinksImage) return;
+    icedDrinksImage.src = ICED_DRINKS_IMAGES[currentLang] || ICED_DRINKS_IMAGES.en;
+    icedDrinksImage.alt = currentLang === 'fr' ? 'Menu des boissons glacées' : 'Iced drinks menu';
+  }
+
   // Keep language updates consistent with tea/food by re-rendering coffee preview.
   function setCoffeeImage() {
     updateCoffeeBuildPreview();
@@ -690,7 +728,13 @@ document.addEventListener('DOMContentLoaded', () => {
         baseText += ' non sucré';
       }
       if (flavor) {
-        baseText += flavor === 'maple' ? " à l'érable" : ' à la vanille';
+        if (flavor === 'maple') {
+          baseText += " à l'érable";
+        } else if (flavor === 'simple-syrup') {
+          baseText += ' avec sirop simple';
+        } else {
+          baseText += ' à la vanille';
+        }
       }
       if (milkType?.fr) {
         baseText += flavor ? ` et au ${milkType.fr}` : ` au ${milkType.fr}`;
@@ -715,7 +759,13 @@ document.addEventListener('DOMContentLoaded', () => {
       leadParts.push(milkType.en);
     }
     if (flavor) {
-      leadParts.push(flavor === 'maple' ? 'maple' : 'vanilla');
+      if (flavor === 'maple') {
+        leadParts.push('maple');
+      } else if (flavor === 'simple-syrup') {
+        leadParts.push('simple syrup');
+      } else {
+        leadParts.push('vanilla');
+      }
     }
     const assembledStem = leadParts.length
       ? `${prefix}${leadParts.join(' ')} ${remainder.charAt(0).toLowerCase()}${remainder.slice(1)}`
@@ -1384,6 +1434,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (coffeeFlavorGroup) {
       coffeeFlavorGroup.hidden = !selectedBases.length;
     }
+    const showSimpleSyrup = coffeeBuildState.temperature === 'iced';
+    if (coffeeFlavorSimpleSyrupBtn) {
+      coffeeFlavorSimpleSyrupBtn.hidden = !showSimpleSyrup;
+    }
+    const coffeeFlavorOptions = coffeeFlavorVanillaBtn?.parentElement;
+    if (coffeeFlavorOptions) {
+      coffeeFlavorOptions.classList.toggle('has-three-options', showSimpleSyrup);
+    }
+    if (!showSimpleSyrup && coffeeBuildState.flavor === 'simple-syrup') {
+      coffeeBuildState.flavor = null;
+    }
     const showShotGroup = espressoSelected && (
       !espressoOnly ||
       coffeeBuildState.milkIndex > 0 ||
@@ -1431,6 +1492,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setCoffeeBuildOptionState(coffeeMilkTypeLactoseFreeBtn, coffeeBuildState.milkType === 'lactose-free');
     setCoffeeBuildOptionState(coffeeFlavorVanillaBtn, coffeeBuildState.flavor === 'vanilla');
     setCoffeeBuildOptionState(coffeeFlavorMapleBtn, coffeeBuildState.flavor === 'maple');
+    setCoffeeBuildOptionState(coffeeFlavorSimpleSyrupBtn, coffeeBuildState.flavor === 'simple-syrup');
     setCoffeeBuildOptionState(coffeeShotSingleBtn, coffeeBuildState.shot === 'single');
     setCoffeeBuildOptionState(coffeeShotExtraBtn, coffeeBuildState.shot === 'extra');
     setCoffeeBuildOptionState(coffeeForHereBtn, coffeeBuildState.service === 'stay');
@@ -1724,7 +1786,9 @@ document.addEventListener('DOMContentLoaded', () => {
     currentLang = lang;
     syncLanguageSwitchers();
     updateLabels();
+    setHomeLogo();
     setTeaImage();
+    setIcedDrinksImage();
     setCoffeeImage();
     setFoodMenu();
     setLegendLanguage();
@@ -2069,9 +2133,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const homePage = document.getElementById('homePage');
   const foodPage = document.getElementById('foodPage');
   const teaPage = document.getElementById('teaPage');
+  const icedDrinksPage = document.getElementById('icedDrinksPage');
   const coffeePage = document.getElementById('coffeePage');
   const cocktailsPage = document.getElementById('cocktailsPage');
   const shelfPage = document.getElementById('shelfPage');
+  const icedDrinksImage = document.getElementById('icedDrinksImage');
   const coffeeBuildView = document.getElementById('coffeeBuildView');
   const coffeeBuildImage = document.getElementById('coffeeBuildImage');
   const coffeeBuildCaption = document.getElementById('coffeeBuildCaption');
@@ -2105,6 +2171,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const coffeeFlavorGroup = document.getElementById('coffeeFlavorGroup');
   const coffeeFlavorVanillaBtn = document.getElementById('coffeeFlavorVanillaBtn');
   const coffeeFlavorMapleBtn = document.getElementById('coffeeFlavorMapleBtn');
+  const coffeeFlavorSimpleSyrupBtn = document.getElementById('coffeeFlavorSimpleSyrupBtn');
   const coffeeShotGroup = document.getElementById('coffeeShotGroup');
   const coffeeShotSingleBtn = document.getElementById('coffeeShotSingleBtn');
   const coffeeShotExtraBtn = document.getElementById('coffeeShotExtraBtn');
@@ -2312,12 +2379,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const backFoodBtn = document.getElementById('backHome');
   const backTeaBtn = document.getElementById('backTea');
+  const backIcedDrinksBtn = document.getElementById('backIcedDrinks');
   const backCoffeeBtn = document.getElementById('backCoffee');
   const backCocktailsBtn = document.getElementById('backCocktails');
   const backShelfBtn = document.getElementById('backShelf');
+  const icedDrinksBtn = document.getElementById('icedDrinksBtn');
   const pageOpeners = {
     food: openFoodPage,
     tea: openTeaPage,
+    icedDrinks: openIcedDrinksPage,
     coffee: openCoffeePage,
     cocktails: openCocktailsPage,
     shelf: openShelfPage
@@ -2325,6 +2395,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const pageClosers = {
     food: closeFoodPage,
     tea: closeTeaPage,
+    icedDrinks: closeIcedDrinksPage,
     coffee: closeCoffeePage,
     cocktails: closeCocktailsPage,
     shelf: closeShelfPage
@@ -2341,7 +2412,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function hideAllPages() {
-    [foodPage, teaPage, coffeePage, cocktailsPage, shelfPage].forEach(page => {
+    [foodPage, teaPage, icedDrinksPage, coffeePage, cocktailsPage, shelfPage].forEach(page => {
       if (page) {
         page.classList.remove('show');
         page.style.display = 'none';
@@ -2429,6 +2500,37 @@ document.addEventListener('DOMContentLoaded', () => {
       teaPage.classList.remove('show');
       setTimeout(() => {
         if (teaPage) teaPage.style.display = 'none';
+        homePage.style.display = 'block';
+        if (mainLangSwitcher) mainLangSwitcher.style.display = '';
+        releaseTransitionTrigger(trigger, DEFAULT_PRESS_RELEASE_DELAY);
+        clearPressed();
+      }, 400);
+    });
+  }
+
+  function openIcedDrinksPage(event) {
+    const trigger = prepareTriggerForTransition(event);
+    runAfterPressVisual(() => {
+      hideAllPages();
+      setIcedDrinksImage();
+      showPage(icedDrinksPage);
+      homePage.style.display = 'none';
+      if (mainLangSwitcher) mainLangSwitcher.style.display = 'none';
+      syncLanguageSwitchers();
+      releaseTransitionTrigger(trigger);
+    });
+  }
+
+  function closeIcedDrinksPage(event) {
+    const trigger = prepareTriggerForTransition(event);
+    runAfterPressVisual(() => {
+      if (!icedDrinksPage) {
+        releaseTransitionTrigger(trigger, DEFAULT_PRESS_RELEASE_DELAY);
+        return;
+      }
+      icedDrinksPage.classList.remove('show');
+      setTimeout(() => {
+        if (icedDrinksPage) icedDrinksPage.style.display = 'none';
         homePage.style.display = 'block';
         if (mainLangSwitcher) mainLangSwitcher.style.display = '';
         releaseTransitionTrigger(trigger, DEFAULT_PRESS_RELEASE_DELAY);
@@ -2650,6 +2752,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   attachTapHandler(teaBtn, (event) => navigateToPage('tea', event));
   attachTapHandler(backTeaBtn, navigateHome);
+  attachTapHandler(icedDrinksBtn, (event) => navigateToPage('icedDrinks', event));
+  attachTapHandler(backIcedDrinksBtn, navigateHome);
 
   attachTapHandler(coffeeBtn, (event) => navigateToPage('coffee', event));
   attachTapHandler(backCoffeeBtn, navigateHome);
@@ -2740,6 +2844,10 @@ document.addEventListener('DOMContentLoaded', () => {
   attachTapHandler(coffeeFlavorMapleBtn, (event) => {
     event?.preventDefault?.();
     setCoffeeBuildChoice('flavor', 'maple');
+  });
+  attachTapHandler(coffeeFlavorSimpleSyrupBtn, (event) => {
+    event?.preventDefault?.();
+    setCoffeeBuildChoice('flavor', 'simple-syrup');
   });
   attachTapHandler(coffeeShotSingleBtn, (event) => {
     event?.preventDefault?.();
@@ -2926,6 +3034,10 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     window.addEventListener('scroll', scheduleIconRotation, { passive: true });
   }
+
+  applySiteSeason();
+  setHomeLogo();
+  setIcedDrinksImage();
   window.addEventListener('resize', () => {
     collectMenuIcons();
     updateIconRotation();
