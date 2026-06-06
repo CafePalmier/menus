@@ -391,7 +391,7 @@ body[data-site-season="summer"] .tile-grid #teaBtn,
 body[data-site-season="summer"] .tile-grid #icedDrinksBtn,
 body[data-site-season="summer"] .tile-grid #cocktailsBtn {
   grid-column: span 2;
-  aspect-ratio: 0.92 / 1;
+  aspect-ratio: 0.86 / 1;
 }
 body[data-site-season="summer"] .tile-grid #teaBtn .tile-content,
 body[data-site-season="summer"] .tile-grid #icedDrinksBtn .tile-content,
@@ -525,6 +525,12 @@ body[data-site-season="summer"] .tile-grid #cocktailsBtn .tile-content .label {
 
   body[data-site-season="summer"] .tile-grid .tile {
     border-radius: 22px;
+  }
+
+  body[data-site-season="summer"] .tile-grid #teaBtn,
+  body[data-site-season="summer"] .tile-grid #icedDrinksBtn,
+  body[data-site-season="summer"] .tile-grid #cocktailsBtn {
+    aspect-ratio: 0.82 / 1;
   }
 
   body[data-site-season="summer"] .tile-grid .tile-content {
