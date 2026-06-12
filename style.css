@@ -1534,6 +1534,31 @@ body[data-site-season="summer"] .tile-grid #cocktailsBtn .tile-content .label {
   font-weight: 700;
   line-height: 1.26;
 }
+.coffee-build-caption.is-intro {
+  color: var(--color-green);
+  font-style: normal;
+  font-size: 1rem;
+  line-height: 1.32;
+}
+.coffee-build-caption.is-order {
+  font-style: normal;
+}
+.coffee-build-caption-prefix,
+.coffee-build-caption-order {
+  display: block;
+}
+.coffee-build-caption-prefix {
+  margin-bottom: 0.12rem;
+  color: var(--color-brown);
+  font-size: 0.9rem;
+  line-height: 1.15;
+}
+.coffee-build-caption-order {
+  color: var(--color-green);
+  font-style: normal;
+  font-size: 1rem;
+  line-height: 1.2;
+}
 .coffee-build-controls {
   width: calc(100% - 2rem);
   max-width: 460px;
@@ -2366,7 +2391,7 @@ body[data-site-season="summer"] .tile-grid #cocktailsBtn .tile-content .label {
 
 @media (min-width: 700px) {
   .shelf-grid {
-    grid-template-columns: repeat(4, 210px);
+    grid-template-columns: repeat(auto-fit, minmax(160px, 210px));
     justify-content: center;
     gap: 1.5rem;
     margin-top: 1.25rem;

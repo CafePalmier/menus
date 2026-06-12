@@ -777,16 +777,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!coffeeBuildCaption) return;
     const safeText = String(text || '').trim();
     if (!safeText) {
+      coffeeBuildCaption.classList.remove('is-intro');
+      coffeeBuildCaption.classList.remove('is-order');
       coffeeBuildCaption.textContent = '';
       return;
     }
     if (safeText === getCoffeeBuildLabel('coffeeBuildStart')) {
+      coffeeBuildCaption.classList.add('is-intro');
+      coffeeBuildCaption.classList.remove('is-order');
       coffeeBuildCaption.textContent = safeText;
       return;
     }
-    coffeeBuildCaption.textContent = currentLang === 'fr'
-      ? `« ${safeText} »`
-      : `"${safeText}"`;
+    coffeeBuildCaption.classList.remove('is-intro');
+    coffeeBuildCaption.classList.add('is-order');
+    const orderPrefix = currentLang === 'fr' ? 'Votre commande :' : 'Your Order:';
+    const orderText = currentLang === 'fr' ? `« ${safeText} »` : `"${safeText}"`;
+    coffeeBuildCaption.innerHTML = `<span class="coffee-build-caption-prefix">${orderPrefix}</span><span class="coffee-build-caption-order">${orderText}</span>`;
   }
 
   function updateCoffeeBuildCaption() {
