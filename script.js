@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     full: {
       sections: [
         { key: 'toast',        labels: { en: 'Toast',               fr: 'Toast' } },
-        { key: 'french_toast', labels: { en: 'French Toast & Pancakes', fr: 'Pain doré & Pancakes' } },
+        { key: 'french_toast', labels: { en: 'Sweet Treats',        fr: 'Petits Douceurs' } },
         { key: 'bowls',        labels: { en: 'Bowls',               fr: 'Bols' } },
         { key: 'sandwich',     labels: { en: 'Sandwich',            fr: 'Sandwich' } },
         { key: 'a_la_carte',   labels: { en: 'À la carte',          fr: 'À la carte' } }
@@ -128,12 +128,12 @@ document.addEventListener('DOMContentLoaded', () => {
       <section id="food-toast-en" class="menu-section image-card" data-section-key="toast">
         <h2 class="sr-only">Toast</h2>
         <img src="Assets/menus/food/eng/toasts.png" alt="Toasts menu" class="food-menu-image" loading="lazy" />
-        <img src="Assets/menus/food/icons/gravlax.png" alt="" aria-hidden="true" class="menu-icon icon-gravlax" />
+        <img src="Assets/menus/food/icons/avo.png" alt="" aria-hidden="true" class="menu-icon icon-gravlax" />
       </section>
 
       <section id="food-french-en" class="menu-section image-card" data-section-key="french_toast">
-        <h2 class="sr-only">French Toast &amp; More</h2>
-        <img src="Assets/menus/food/eng/french-toasts.png" alt="French toast and more menu" class="food-menu-image" loading="lazy" />
+        <h2 class="sr-only">Sweet Treats</h2>
+        <img src="Assets/menus/food/eng/french-toasts.png" alt="Sweet Treats menu" class="food-menu-image" loading="lazy" />
         <img src="Assets/menus/food/icons/pancakes.png" alt="" aria-hidden="true" class="menu-icon icon-pancakes-left" />
       </section>
 
@@ -161,12 +161,12 @@ document.addEventListener('DOMContentLoaded', () => {
       <section id="food-toast-fr" class="menu-section image-card" data-section-key="toast">
         <h2 class="sr-only">Toast</h2>
         <img src="Assets/menus/food/fra/toasts.png" alt="Menu Toasts" class="food-menu-image" loading="lazy" />
-        <img src="Assets/menus/food/icons/gravlax.png" alt="" aria-hidden="true" class="menu-icon icon-gravlax" />
+        <img src="Assets/menus/food/icons/avo.png" alt="" aria-hidden="true" class="menu-icon icon-gravlax" />
       </section>
 
       <section id="food-french-fr" class="menu-section image-card" data-section-key="french_toast">
-        <h2 class="sr-only">Pain Doré &amp; Plus</h2>
-        <img src="Assets/menus/food/fra/pain-dores.png" alt="Menu pain doré et plus" class="food-menu-image" loading="lazy" />
+        <h2 class="sr-only">Petits Douceurs</h2>
+        <img src="Assets/menus/food/fra/pain-dores.png" alt="Menu Petits Douceurs" class="food-menu-image" loading="lazy" />
         <img src="Assets/menus/food/icons/pancakes.png" alt="" aria-hidden="true" class="menu-icon icon-pancakes-left" />
       </section>
 
@@ -2349,7 +2349,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const anchor = parseFloat(icon.dataset.anchor || '0');
       const centerY = anchor - scrollTop;
       const progress = Math.min(Math.max(centerY / vh, 0), 1); // 1 at bottom, 0 at top
-      const angle = -8 + (-45 * progress); // slightly counterclockwise at rest, more as it moves down
+      const baseAngle = -6.4; // 20% more clockwise at rest
+      const angle = baseAngle + (-36 * progress); // slightly counterclockwise as it moves down
       icon.style.transform = `rotate(${angle}deg)`;
     });
   }
