@@ -1119,11 +1119,20 @@ body[data-site-season="summer"] .tile-grid #cocktailsBtn .tile-content .label {
 .food-menu-image {
   display: block;
   width: 100%;
+  height: auto;
   max-width: 990px;
   margin: 0 auto 1rem;
   border-radius: 0;
   box-shadow: none;
   background: transparent;
+}
+.food-soup-image {
+  width: 71%;
+}
+.food-bread-credit {
+  width: 95%;
+  max-width: 495px;
+  margin-top: 1.5rem;
 }
 .food-menu {
   padding-left: 0.05rem;
@@ -1155,7 +1164,7 @@ body[data-site-season="summer"] .tile-grid #cocktailsBtn .tile-content .label {
 }
 .icon-gravlax {
   width: clamp(98px, 23vw, 168px);
-  bottom: calc(-10px - 1cm);
+  bottom: -36px;
   right: -2vw;
 }
 .icon-pancakes {
@@ -1228,7 +1237,7 @@ body[data-site-season="summer"] .tile-grid #cocktailsBtn .tile-content .label {
 
 @media (min-width: 540px) and (max-width: 899px) {
   .icon-gravlax {
-    bottom: calc(-10px - 2cm);
+    bottom: -74px;
   }
 
   .icon-pancakes,
@@ -1239,7 +1248,7 @@ body[data-site-season="summer"] .tile-grid #cocktailsBtn .tile-content .label {
 
 @media (min-width: 900px) {
   .icon-gravlax {
-    bottom: calc(-10px - 2cm);
+    bottom: -74px;
   }
 
   .icon-pancakes {

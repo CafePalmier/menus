@@ -121,74 +121,89 @@ document.addEventListener('DOMContentLoaded', () => {
         { key: 'french_toast', labels: { en: 'Sweet Treats',        fr: 'Petits Douceurs' } },
         { key: 'bowls',        labels: { en: 'Bowls',               fr: 'Bols' } },
         { key: 'sandwich',     labels: { en: 'Sandwich',            fr: 'Sandwich' } },
+        { key: 'soup',         labels: { en: 'Soup of the Day',     fr: 'Soupe du jour' } },
         { key: 'a_la_carte',   labels: { en: 'À la carte',          fr: 'À la carte' } }
       ],
       menus: {
         en: `
       <section id="food-toast-en" class="menu-section image-card" data-section-key="toast">
         <h2 class="sr-only">Toast</h2>
-        <img src="Assets/menus/food/eng/toasts.png" alt="Toasts menu" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/eng/toasts.png" alt="Toasts menu" class="food-menu-image" width="1364" height="486" loading="lazy" />
         <img src="Assets/menus/food/icons/avo.png" alt="" aria-hidden="true" class="menu-icon icon-gravlax" />
       </section>
 
       <section id="food-french-en" class="menu-section image-card" data-section-key="french_toast">
         <h2 class="sr-only">Sweet Treats</h2>
-        <img src="Assets/menus/food/eng/french-toasts.png" alt="Sweet Treats menu" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/eng/french-toasts.png" alt="Sweet Treats menu" class="food-menu-image" width="1364" height="1231" loading="lazy" />
         <img src="Assets/menus/food/icons/pancakes.png" alt="" aria-hidden="true" class="menu-icon icon-pancakes-left" />
       </section>
 
       <section id="food-bowls-en" class="menu-section image-card" data-section-key="bowls">
         <h2 class="sr-only">Bowls</h2>
-        <img src="Assets/menus/food/eng/bowls.png" alt="Bowls menu" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/eng/bowls.png" alt="Bowls menu" class="food-menu-image" width="1364" height="1599" loading="lazy" />
         <img src="Assets/menus/food/icons/breakfastsandwich.png" alt="" aria-hidden="true" class="menu-icon icon-breakfast-right" />
       </section>
 
       <section id="food-sandwich-en" class="menu-section image-card" data-section-key="sandwich">
         <h2 class="sr-only">Sandwich</h2>
-        <img src="Assets/menus/food/eng/sandwiches.png" alt="Sandwich menu" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/eng/sandwiches.png" alt="Sandwich menu" class="food-menu-image" width="1364" height="1640" loading="lazy" />
+      </section>
+
+      <section id="food-soup-en" class="menu-section image-card" data-section-key="soup">
+        <h2 class="sr-only">Soup of the Day</h2>
+        <img src="Assets/menus/food/eng/soup.png" alt="14. Gluten-free and vegan. Ask us what’s on today." class="food-menu-image food-soup-image" width="949" height="249" loading="lazy" />
       </section>
 
       <section id="food-alacarte-en" class="menu-section image-card" data-section-key="a_la_carte">
         <h2 class="sr-only">À la carte</h2>
-        <img src="Assets/menus/food/eng/a-la-carte.png" alt="À la carte menu" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/eng/a-la-carte.png" alt="À la carte menu" class="food-menu-image" width="1364" height="570" loading="lazy" />
         <div class="food-stack-with-icon">
           <img src="Assets/menus/food/icons/poptart.png" alt="" aria-hidden="true" class="menu-icon icon-poptart-between" />
-          <img src="Assets/menus/food/eng/add.png" alt="Add-ons menu" class="food-menu-image stacked" loading="lazy" />
+          <img src="Assets/menus/food/eng/add.png" alt="Add-ons menu" class="food-menu-image stacked" width="1364" height="593" loading="lazy" />
         </div>
       </section>
+
+      <img src="Assets/menus/food/eng/Bread-By-Us.png" alt="Proudly serving locally baked bread from Bread By Us." class="food-menu-image food-bread-credit" width="1166" height="230" loading="lazy" />
     `,
         fr: `
       <section id="food-toast-fr" class="menu-section image-card" data-section-key="toast">
         <h2 class="sr-only">Toast</h2>
-        <img src="Assets/menus/food/fra/toasts.png" alt="Menu Toasts" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/fra/toasts.png" alt="Menu Toasts" class="food-menu-image" width="1362" height="439" loading="lazy" />
         <img src="Assets/menus/food/icons/avo.png" alt="" aria-hidden="true" class="menu-icon icon-gravlax" />
       </section>
 
       <section id="food-french-fr" class="menu-section image-card" data-section-key="french_toast">
         <h2 class="sr-only">Petits Douceurs</h2>
-        <img src="Assets/menus/food/fra/pain-dores.png" alt="Menu Petits Douceurs" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/fra/pain-dores.png" alt="Menu Petits Douceurs" class="food-menu-image" width="1362" height="1195" loading="lazy" />
         <img src="Assets/menus/food/icons/pancakes.png" alt="" aria-hidden="true" class="menu-icon icon-pancakes-left" />
       </section>
 
       <section id="food-bowls-fr" class="menu-section image-card" data-section-key="bowls">
         <h2 class="sr-only">Bols</h2>
-        <img src="Assets/menus/food/fra/bols.png" alt="Menu bols" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/fra/bols.png" alt="Menu bols" class="food-menu-image" width="1362" height="1705" loading="lazy" />
         <img src="Assets/menus/food/icons/breakfastsandwich.png" alt="" aria-hidden="true" class="menu-icon icon-breakfast-right" />
       </section>
 
       <section id="food-sandwich-fr" class="menu-section image-card" data-section-key="sandwich">
         <h2 class="sr-only">Sandwich</h2>
-        <img src="Assets/menus/food/fra/sandwichs.png" alt="Menu sandwichs" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/fra/sandwichs.png" alt="Menu sandwichs" class="food-menu-image" width="1363" height="1625" loading="lazy" />
+      </section>
+
+      <section id="food-soup-fr" class="menu-section image-card" data-section-key="soup">
+        <h2 class="sr-only">Soupe du jour</h2>
+        <img src="Assets/menus/food/fra/soupe.png" alt="14. Sans gluten et végétalienne. Demandez-nous ce qu’on sert aujourd’hui." class="food-menu-image food-soup-image" width="971" height="257" loading="lazy" />
       </section>
 
       <section id="food-alacarte-fr" class="menu-section image-card" data-section-key="a_la_carte">
         <h2 class="sr-only">À la carte</h2>
-        <img src="Assets/menus/food/fra/a-la-carte.png" alt="Menu à la carte" class="food-menu-image" loading="lazy" />
+        <img src="Assets/menus/food/fra/a-la-carte.png" alt="Menu à la carte" class="food-menu-image" width="1362" height="575" loading="lazy" />
         <div class="food-stack-with-icon">
           <img src="Assets/menus/food/icons/poptart.png" alt="" aria-hidden="true" class="menu-icon icon-poptart-between" />
-          <img src="Assets/menus/food/fra/add.png" alt="Menu ajouter" class="food-menu-image stacked" loading="lazy" />
+          <img src="Assets/menus/food/fra/add.png" alt="Menu ajouter" class="food-menu-image stacked" width="1362" height="629" loading="lazy" />
         </div>
       </section>
+
+      <img src="Assets/menus/food/fra/Bread-By-Us-fra.png" alt="Fiers de vous servir les pains de la boulangerie locale Bread By Us." class="food-menu-image food-bread-credit" width="1313" height="230" loading="lazy" />
     `
       }
     }
